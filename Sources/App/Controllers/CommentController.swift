@@ -37,7 +37,7 @@ struct CommentController: RouteCollection {
      ```sh
      curl -X GET http://localhost:8080/posts/IDENTIFIER/comments/ \
          -H "Accept: application/json" \
-         |json
+         |jq
      ```
      */
     func list(req: Request) async throws -> [Comment.List] {
@@ -87,7 +87,7 @@ struct CommentController: RouteCollection {
          {
              "content": "Lorem ipsum dolor sit amet"
          }
-         '|json
+         '|jq
      ```
      */
     func create(req: Request) async throws -> Comment.Detail {

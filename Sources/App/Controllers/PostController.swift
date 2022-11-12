@@ -59,7 +59,7 @@ struct PostController: RouteCollection {
      ```sh
      curl -X GET http://localhost:8080/posts \
          -H "Accept: application/json" \
-         |json
+         |jq
      ```
      */
     func list(req: Request) async throws -> Page<Post.List> {
@@ -112,9 +112,9 @@ struct PostController: RouteCollection {
 
     /**
      ```sh
-     curl -X GET http://localhost:8080/posts \
+     curl -X GET http://localhost:8080/posts/[id]/ \
          -H "Accept: application/json" \
-         |json
+         |jq
      ```
      */
     func detail(req: Request) async throws -> Post.Detail {
@@ -149,7 +149,7 @@ struct PostController: RouteCollection {
              "content": "Lorem ipsum dolor sit amet",
              "tagIds": []
          }
-         '|json
+         '|jq
      ```
      */
     func create(req: Request) async throws -> Post.Detail {
@@ -191,7 +191,7 @@ struct PostController: RouteCollection {
              "content": "Lorem ipsum dolor sit amet",
              "tagIds": []
          }
-         '|json
+         '|jq
      ```
      */
     func update(req: Request) async throws -> Post.Detail {
@@ -232,7 +232,7 @@ struct PostController: RouteCollection {
              "content": "Lorem ipsum dolor sit amet",
              "tagIds": []
          }
-         '|json
+         '|jq
      ```
      */
     func patch(req: Request) async throws -> Post.Detail {

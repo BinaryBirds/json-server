@@ -14,16 +14,26 @@ struct FileController: RouteCollection {
      curl -X POST "http://localhost:8080/files/?key=test.jpg" \
          -H "Authorization: Bearer TOKEN" \
          -H "Accept: application/json" \
-         --data-binary @"/Users/tib/test.jpg"|json
+         --data-binary @"/Users/tib/test.jpg"
      ```
      */
     func upload(req: Request) async throws -> String {
         let key = try req.query.get(String.self, at: "key")
-        let path = req.application.directory.publicDirectory + key
+        
+        let baseUrl = URL(fileURLWithPath: req.application.directory.publicDirectory)
+        let uploadsUrl = baseUrl.appendingPathComponent("uploads")
+        let fileUrl = uploadsUrl.appendingPathComponent(key)
+
+        try? FileManager.default.createDirectory(
+            at: uploadsUrl,
+            withIntermediateDirectories: false,
+            attributes: [.posixPermissions: 0o744]
+        )
+        
         return try await req.body.collect()
             .unwrap(or: Abort(.noContent))
-            .flatMap { req.fileio.writeFile($0, at: path) }
-            .map { "http://localhost:8080/" + key }
+            .flatMap { req.fileio.writeFile($0, at: fileUrl.path) }
+            .map { "http://localhost:8080/uploads/" + key }
             .get()
     }
 }

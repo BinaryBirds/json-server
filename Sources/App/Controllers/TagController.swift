@@ -39,7 +39,7 @@ struct TagController: RouteCollection {
      ```sh
      curl -X GET http://localhost:8080/tags \
          -H "Accept: application/json" \
-         |json
+         |jq
      ```
      */
     func list(req: Request) async throws -> [Tag.List] {
@@ -58,7 +58,7 @@ struct TagController: RouteCollection {
          {
              "name": "Yellow"
          }
-         '|json
+         '|jq
      ```
      */
     func create(req: Request) async throws -> Tag.Detail {
@@ -78,7 +78,7 @@ struct TagController: RouteCollection {
          {
              "name": "Orange"
          }
-         '|json
+         '|jq
      ```
      */
     func update(req: Request) async throws -> Tag.Detail {
@@ -99,7 +99,7 @@ struct TagController: RouteCollection {
          {
              "name": "Orange"
          }
-         '|json
+         '|jq
      ```
      */
     func patch(req: Request) async throws -> Tag.Detail {

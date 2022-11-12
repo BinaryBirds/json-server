@@ -154,6 +154,15 @@
       }
     },
     {
+      "identity" : "swift-html",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/binarybirds/swift-html",
+      "state" : {
+        "revision" : "e07678a77d296e66fa891a9d4d08acc4471d1783",
+        "version" : "1.6.11"
+      }
+    },
+    {
       "identity" : "swift-log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",

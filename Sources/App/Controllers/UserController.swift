@@ -33,7 +33,7 @@ struct UserController: RouteCollection {
              "email": "root@localhost.com",
              "password": "ChangeMe1"
          }
-         '|json
+         '|jq
      ```
      */
     func login(req: Request) async throws -> UserToken.Detail {
@@ -63,7 +63,7 @@ struct UserController: RouteCollection {
      curl -X GET http://localhost:8080/user/me \
          -H "Authorization: Bearer TOKEN" \
          -H "Accept: application/json" \
-         |json
+         |jq
      ```
      */
     func me(req: Request) async throws -> User.Detail {
@@ -94,7 +94,7 @@ struct UserController: RouteCollection {
              "email": "root@localhost.com",
              "password": "ChangeMe1"
          }
-         '|json
+         '|jq
      ```
      */
     func update(req: Request) async throws -> User.Detail {
@@ -134,7 +134,7 @@ struct UserController: RouteCollection {
              "email": "root@localhost.com",
              "password": "ChangeMe1"
          }
-         '|json
+         '|jq
      ```
      */
     func patch(req: Request) async throws -> User.Detail {

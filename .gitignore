@@ -2,4 +2,4 @@
 .swiftpm
 .build
 db.sqlite
-Public/*
+Public/uploads/*
