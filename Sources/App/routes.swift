@@ -3,10 +3,16 @@ import Vapor
 
 func routes(_ app: Application) throws {
 
-    try app.register(collection: TagController())
-    try app.register(collection: PostController())
-    try app.register(collection: CommentController())
-    try app.register(collection: UserController())
-    try app.register(collection: FileController())
-    try app.register(collection: WebController())
+    let apiCollections: [RouteCollection] = [
+        TagController(),
+        PostController(),
+        CommentController(),
+        FileController(),
+        UserController(),
+    ]
+    let apiRoutes = app.routes.grouped("api").grouped("v1")
+    for collection in apiCollections {
+        try apiRoutes.register(collection: collection)
+    }
+    try app.routes.register(collection: WebController())
 }
