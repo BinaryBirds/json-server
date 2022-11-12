@@ -201,5 +201,25 @@ dd {
     font-weight: bold;
 }
 
+span.type.uuid { color: blue; }
+span.type.string { color: blue; }
+span.type.int { color: blue; }
+span.type.bool { color: blue; }
+span.type.double { color: blue; }
+span.type.array { color: blue; }
+span.type.object { color: blue; }
 
-
+dl {
+    display: none;
+}
+* + h2 {
+    margin-top: 64px;
+}
+h3 {
+    border-bottom: 1px solid #ccc;
+    margin: 16px 0;
+}
+h3:hover {
+    cursor: pointer;
+    
+}

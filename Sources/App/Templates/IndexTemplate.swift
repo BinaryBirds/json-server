@@ -9,7 +9,7 @@ import SwiftHtml
 
 struct IndexTemplate {
     
-    static func build(_ endpoints: [Endpoint]) -> SwiftHtml.Tag {
+    static func build(_ groups: [Group]) -> SwiftHtml.Tag {
         Html {
             Head {
                 Meta().charset("utf-8")
@@ -70,102 +70,105 @@ struct IndexTemplate {
 
                 Section {
                     Div {
-                        H2("Endpoints")
-                        P("Lorem ipsum dolor sit amet")
 
-                        Div {
-                            for endpoint in endpoints {
-                                H3(endpoint.path)
-                                Dl {
-                                    Dt {
-                                        Span(endpoint.method.rawValue)
-                                            .class("method", endpoint.method.rawValue)
-                                        Text(" " + endpoint.path)
-                                    }
-                                    Dd {
-                                        P(endpoint.info)
-                                        
-                                        H4("Request")
-                                        
-                                        H5("Query parameters")
-                                        Ul {
-                                            for param in endpoint.request.queryParams {
-                                                Li {
-                                                    if param.isRequired {
-                                                        Span {
+                        for (groupIndex, group) in groups.enumerated() {
+                            H2(group.name)
+                            P(group.info)
+                            
+                            Div {
+                                for (endpointIndex, endpoint) in group.endpoints.enumerated() {
+                                    H3(endpoint.name)
+                                        .onClick("toggleElement('dl-item-\(groupIndex+1)-\(endpointIndex+1)')")
+                                    Dl {
+                                        Dt {
+                                            Span(endpoint.method.rawValue)
+                                                .class("method", endpoint.method.rawValue)
+                                            Text(" " + endpoint.path)
+                                        }
+                                        Dd {
+                                            P(endpoint.info)
+                                            
+                                            H4("Request")
+                                            
+                                            H5("Query parameters")
+                                            Ul {
+                                                for param in endpoint.request.queryParams {
+                                                    Li {
+                                                        if param.isRequired {
+                                                            Span {
+                                                                Span(param.name)
+                                                                    .class("name")
+                                                                Span(": " + param.type.htmlValue)
+                                                                    .class("type")
+                                                            }
+                                                            .class("required")
+                                                        }
+                                                        else {
                                                             Span(param.name)
                                                                 .class("name")
-                                                            Span(" :" + param.type.rawValue)
+                                                            Span(": " + param.type.htmlValue)
                                                                 .class("type")
                                                         }
-                                                        .class("required")
+                                                        Span(param.info)
+                                                            .class("description")
                                                     }
-                                                    else {
-                                                        Span(param.name)
+                                                    
+                                                }
+                                            }
+                                            .class("parameters")
+                                            
+                                            H5("Headers")
+                                            render(headers: endpoint.request.headers)
+                                            
+                                            
+                                            H5("Body")
+                                            render(objects: endpoint.request.body)
+                                            
+                                            
+                                            H4("Response")
+                                            
+                                            H5("Status codes")
+                                            
+                                            Ul {
+                                                for status in endpoint.response.statusCodes {
+                                                    Li {
+                                                        Span(String(status.value.code))
+                                                            .class("code")
+                                                        Span(" - " + status.value.reasonPhrase.capitalized)
                                                             .class("name")
-                                                        Span(" :" + param.type.rawValue)
-                                                            .class("type")
+                                                        
+                                                        Span(status.info)
+                                                            .class("reason")
                                                     }
-                                                    Span(param.info)
-                                                        .class("description")
+                                                    .class("httpStatus\(String(status.value.code / 100))xx")
                                                 }
-                                                
                                             }
-                                        }
-                                        .class("parameters")
-                                        
-                                        H5("Headers")
-                                        render(headers: endpoint.request.headers)
-                                        
-                                        
-                                        H5("Body")
-                                        render(objects: endpoint.request.body)
-                                        
-                                        
-                                        H4("Response")
-                                        
-                                        H5("Status codes")
-         
-                                        Ul {
-                                            for status in endpoint.response.statusCodes {
-                                                Li {
-                                                    Span(String(status.value.code))
-                                                        .class("code")
-                                                    Span(" - " + status.value.reasonPhrase.capitalized)
-                                                        .class("name")
-                                                
-                                                    Span(status.info)
-                                                        .class("reason")
-                                                }
-                                                .class("httpStatus\(String(status.value.code / 100))xx")
+                                            .class("response-codes")
+                                            
+                                            H5("Headers")
+                                            render(headers: endpoint.response.headers)
+                                            
+                                            H5("Body")
+                                            render(objects: endpoint.response.body)
+                                            
+                                            H4("Example")
+                                            
+                                            H5("Request")
+                                            Pre {
+                                                Code(endpoint.request.example)
                                             }
-                                        }
-                                        .class("response-codes")
-                                    
-                                        H5("Headers")
-                                        render(headers: endpoint.response.headers)
-                                        
-                                        H5("Body")
-                                        render(objects: endpoint.response.body)
-                                        
-                                        H4("Example")
-                                        
-                                        H5("Request")
-                                        Pre {
-                                            Code(endpoint.request.example)
-                                        }
-                                        
-                                        H5("Response")
-                                        Pre {
-                                            Code(endpoint.response.example)
+                                            
+                                            H5("Response")
+                                            Pre {
+                                                Code(endpoint.response.example)
+                                            }
                                         }
                                     }
+                                    .id("dl-item-\(groupIndex+1)-\(endpointIndex+1)")
                                 }
-                                    
-                                
                             }
+                            .class("endpoints")
                         }
-                        .class("endpoints")
                     }
                     .class("container")
                 }
@@ -206,7 +209,7 @@ private extension IndexTemplate {
                         Span {
                             Span(header.key)
                                 .class("name")
-                            Span(" :" + header.value)
+                            Span(": " + header.value)
                                 .class("type")
                         }
                         .class("required")
@@ -214,7 +217,7 @@ private extension IndexTemplate {
                     else {
                         Span(header.key)
                             .class("name")
-                        Span(" :" + header.value)
+                        Span(": " + header.value)
                             .class("type")
                     }
                     Span(header.info)
@@ -239,7 +242,7 @@ private extension IndexTemplate {
                             Span {
                                 Span(param.name)
                                     .class("name")
-                                Span(" :" + param.type.rawValue)
+                                Span(": " + param.type.htmlValue)
                                     .class("type")
                             }
                             .class("required")
@@ -247,7 +250,7 @@ private extension IndexTemplate {
                         else {
                             Span(param.name)
                                 .class("name")
-                            Span(" :" + param.type.rawValue)
+                            Span(": " + param.type.htmlValue)
                                 .class("type")
                         }
                         Span(param.info)

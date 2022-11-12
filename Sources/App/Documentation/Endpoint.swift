@@ -10,6 +10,8 @@ import Vapor
 
 struct Endpoint {
 
+    let name: String
+
     let method: Method
     let path: String
     let info: String
@@ -40,6 +42,19 @@ extension Endpoint {
         case double
         case array
         case object
+        
+        var name: String {
+            switch self {
+            case .uuid:
+                return rawValue.uppercased()
+            default:
+                return rawValue.capitalized
+            }
+        }
+        
+        var htmlValue: String {
+            "<span class=\"type \(rawValue)\">\(name)</span>"
+        }
     }
 }
 
@@ -111,4 +126,11 @@ enum EndpointBuilder {
     static func buildBlock(_ components: Endpoint...) -> [Endpoint] {
         components
     }
+}
+
+struct Group {
+    let name: String
+    let info: String
+
+    let endpoints: [Endpoint]
 }
