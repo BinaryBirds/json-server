@@ -77,8 +77,9 @@ struct IndexTemplate {
                             
                             Div {
                                 for (endpointIndex, endpoint) in group.endpoints.enumerated() {
+                                    let endpointId = "\(groupIndex+1)-\(endpointIndex+1)"
                                     H3(endpoint.name)
-                                        .onClick("toggleElement('dl-item-\(groupIndex+1)-\(endpointIndex+1)')")
+                                        .onClick("toggleElement('dl-item-\(endpointId)')")
                                     Dl {
                                         Dt {
                                             Span(endpoint.method.rawValue)
@@ -152,6 +153,20 @@ struct IndexTemplate {
                                             render(objects: endpoint.response.body)
                                             
                                             H4("Example")
+                                            
+                                            Div {
+                                                Textarea(endpoint.request.example)
+                                                    .id("example-code-\(endpointId)")
+                                                    .class("original-code")
+                                                
+                                                Button {
+                                                    Text("Copy")
+                                                }
+                                                .id("copy-button-\(endpointId)")
+                                                .onClick("copySnippet('\(endpointId)')")
+                                            }
+                                            .id("tooltip-\(endpointId)")
+                                            .class("tooltip")
                                             
                                             H5("Request")
                                             Pre {

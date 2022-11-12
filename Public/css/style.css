@@ -211,6 +211,7 @@ span.type.object { color: blue; }
 
 dl {
     display: none;
+    display: block;
 }
 * + h2 {
     margin-top: 64px;
