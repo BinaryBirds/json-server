@@ -14,30 +14,30 @@ struct IndexTemplate {
             Head {
                 Meta().charset("utf-8")
                 Meta().name(.viewport).content("width=device-width, initial-scale=1")
-
-//                Title(title.stripHtml())
-
-//                Style {
-//                    Text(
-//                        ###"""
-//                        :root {
-//                            --primary-color: \###(colors.primary.light);
-//                            --secondary-color: \###(colors.secondary.light);
-//                        }
-//                        @media (prefers-color-scheme: dark) {
-//                            :root {
-//                                --primary-color: \###(colors.primary.dark);
-//                                --secondary-color: \###(colors.secondary.dark);
-//                            }
-//                        }
-//                        """###
-//                        )
-//                }
+                
+                //                Title(title.stripHtml())
+                
+                //                Style {
+                //                    Text(
+                //                        ###"""
+                //                        :root {
+                //                            --primary-color: \###(colors.primary.light);
+                //                            --secondary-color: \###(colors.secondary.light);
+                //                        }
+                //                        @media (prefers-color-scheme: dark) {
+                //                            :root {
+                //                                --primary-color: \###(colors.primary.dark);
+                //                                --secondary-color: \###(colors.secondary.dark);
+                //                            }
+                //                        }
+                //                        """###
+                //                        )
+                //                }
                 
                 Link(rel: .stylesheet).href("./css/colors.css")
                 Link(rel: .stylesheet).href("./css/style.css")
                 Link(rel: .stylesheet).href("./css/code.css")
-
+                
                 
                 Style {
                     Text(###"""
@@ -54,10 +54,10 @@ struct IndexTemplate {
       }
 """###)
                 }
-//                Link(rel: .icon).href("./img/\(key).ico")
-//                Link(rel: .shortcutIcon).href("./img/\(key)/favicon.ico")
-//                Link(rel: .appleTouchIcon).href("./img/\(key)/apple-touch-icon.png")
-
+                //                Link(rel: .icon).href("./img/\(key).ico")
+                //                Link(rel: .shortcutIcon).href("./img/\(key)/favicon.ico")
+                //                Link(rel: .appleTouchIcon).href("./img/\(key)/apple-touch-icon.png")
+                
             }
             Body {
                 Header {
@@ -67,119 +67,34 @@ struct IndexTemplate {
                     }
                     P("Just a dummy API server.")
                 }
-
-                Section {
+                
+                Div {
                     Div {
-
                         for (groupIndex, group) in groups.enumerated() {
-                            H2(group.name)
-                            P(group.info)
+                            Header {
+                                H2(group.name)
+                                P(group.info)
+                            }
+                            .class("group-info")
                             
-                            Div {
+                            
+                            Section {
                                 for (endpointIndex, endpoint) in group.endpoints.enumerated() {
                                     let endpointId = "\(groupIndex+1)-\(endpointIndex+1)"
-                                    H3(endpoint.name)
-                                        .onClick("toggleElement('dl-item-\(endpointId)')")
-                                    Dl {
-                                        Dt {
+                                    
+                                    Div {
+                                        Header {
                                             Span(endpoint.method.rawValue)
                                                 .class("method", endpoint.method.rawValue)
                                             Text(" " + endpoint.path)
+                                            
+                                            Img(src: "/img/chevron-down.svg", alt: "Toggle")
                                         }
-                                        Dd {
-                                            P(endpoint.info)
-                                            
-                                            H4("Request")
-                                            
-                                            H5("Query parameters")
-                                            Ul {
-                                                for param in endpoint.request.queryParams {
-                                                    Li {
-                                                        if param.isRequired {
-                                                            Span {
-                                                                Span(param.name)
-                                                                    .class("name")
-                                                                Span(": " + param.type.htmlValue)
-                                                                    .class("type")
-                                                            }
-                                                            .class("required")
-                                                        }
-                                                        else {
-                                                            Span(param.name)
-                                                                .class("name")
-                                                            Span(": " + param.type.htmlValue)
-                                                                .class("type")
-                                                        }
-                                                        Span(param.info)
-                                                            .class("description")
-                                                    }
-                                                    
-                                                }
-                                            }
-                                            .class("parameters")
-                                            
-                                            H5("Headers")
-                                            render(headers: endpoint.request.headers)
-                                            
-                                            
-                                            H5("Body")
-                                            render(objects: endpoint.request.body)
-                                            
-                                            
-                                            H4("Response")
-                                            
-                                            H5("Status codes")
-                                            
-                                            Ul {
-                                                for status in endpoint.response.statusCodes {
-                                                    Li {
-                                                        Span(String(status.value.code))
-                                                            .class("code")
-                                                        Span(" - " + status.value.reasonPhrase.capitalized)
-                                                            .class("name")
-                                                        
-                                                        Span(status.info)
-                                                            .class("reason")
-                                                    }
-                                                    .class("httpStatus\(String(status.value.code / 100))xx")
-                                                }
-                                            }
-                                            .class("response-codes")
-                                            
-                                            H5("Headers")
-                                            render(headers: endpoint.response.headers)
-                                            
-                                            H5("Body")
-                                            render(objects: endpoint.response.body)
-                                            
-                                            H4("Example")
-                                            
-                                            Div {
-                                                Textarea(endpoint.request.example)
-                                                    .id("example-code-\(endpointId)")
-                                                    .class("original-code")
-                                                
-                                                Button {
-                                                    Text("Copy")
-                                                }
-                                                .id("copy-button-\(endpointId)")
-                                                .onClick("copySnippet('\(endpointId)')")
-                                            }
-                                            .id("tooltip-\(endpointId)")
-                                            .class("tooltip")
-                                            
-                                            H5("Request")
-                                            Pre {
-                                                Code(endpoint.request.example)
-                                            }
-                                            
-                                            H5("Response")
-                                            Pre {
-                                                Code(endpoint.response.example)
-                                            }
-                                        }
+                                        .onClick("toggleElement('endpoint-\(endpointId)')")
+                                        
+                                        details(endpoint: endpoint, endpointId: endpointId)
                                     }
-                                    .id("dl-item-\(groupIndex+1)-\(endpointIndex+1)")
+                                    .class("endpoint")
                                 }
                             }
                             .class("endpoints")
@@ -187,10 +102,8 @@ struct IndexTemplate {
                     }
                     .class("container")
                 }
+                .class("wrapper")
                 
-                
-
-
                 Footer {
                     P {
                         Text("Created by ")
@@ -213,7 +126,55 @@ struct IndexTemplate {
 
 
 private extension IndexTemplate {
-
+    
+    @TagBuilder
+    static func details(endpoint: Endpoint, endpointId: String) -> SwiftHtml.Tag {
+        Div {
+            Div {
+                Header {
+                    H3(endpoint.name)
+                    P(endpoint.info)
+                }
+                
+                Div {
+                    Button("Example")
+                        .onClick("openCity(event, 'example')")
+                        .class("tablinks active")
+                    
+                    Button("Request")
+                        .onClick("openCity(event, 'request')")
+                        .class("tablinks")
+                    
+                    Button("Response")
+                        .onClick("openCity(event, 'response')")
+                        .class("tablinks")
+                }
+                .class("tab")
+                
+                Div {
+                    exampleBlock(endpoint, endpointId: endpointId)
+                }
+                .id("example")
+                .class("tabcontent", "first")
+                
+                Div {
+                    requestBlock(endpoint)
+                }
+                .id("request")
+                .class("tabcontent")
+                
+                Div {
+                    responseBlock(endpoint)
+                }
+                .id("response")
+                .class("tabcontent")
+            }
+            .class("details")
+        }
+        .id("endpoint-\(endpointId)")
+        .class("details-wrapper")
+    }
+    
     @TagBuilder
     static func render(headers: [Endpoint.Header]) -> SwiftHtml.Tag {
         
@@ -276,5 +237,98 @@ private extension IndexTemplate {
             }
             .class("parameters")
         }
+    }
+    
+    @TagBuilder
+    static func exampleBlock(_ endpoint: Endpoint, endpointId: String) -> SwiftHtml.Tag {
+        Div {
+            Textarea(endpoint.request.example)
+                .id("example-code-\(endpointId)")
+                .class("original-code")
+            
+            Button {
+                Text("Copy")
+            }
+            .id("copy-button-\(endpointId)")
+            .class("copy-button")
+            .onClick("copySnippet('\(endpointId)')")
+        }
+        .id("tooltip-\(endpointId)")
+        .class("tooltip")
+        
+        H4("Request")
+        Pre {
+            
+            
+            Code(endpoint.request.curl)
+        }
+        
+        H4("Response")
+        Pre {
+            Code(endpoint.response.example)
+        }
+    }
+    
+    @TagBuilder
+    static func requestBlock(_ endpoint: Endpoint) -> SwiftHtml.Tag {
+        H4("Query parameters")
+        Ul {
+            for param in endpoint.request.queryParams {
+                Li {
+                    if param.isRequired {
+                        Span {
+                            Span(param.name)
+                                .class("name")
+                            Span(": " + param.type.htmlValue)
+                                .class("type")
+                        }
+                        .class("required")
+                    }
+                    else {
+                        Span(param.name)
+                            .class("name")
+                        Span(": " + param.type.htmlValue)
+                            .class("type")
+                    }
+                    Span(param.info)
+                        .class("description")
+                }
+                
+            }
+        }
+        .class("parameters")
+        
+        H4("Headers")
+        render(headers: endpoint.request.headers)
+        
+        H4("Body")
+        render(objects: endpoint.request.body)
+    }
+    
+    @TagBuilder
+    static func responseBlock(_ endpoint: Endpoint) -> SwiftHtml.Tag {
+        
+        H4("Status codes")
+        Ul {
+            for status in endpoint.response.statusCodes {
+                Li {
+                    Span(String(status.value.code))
+                        .class("code")
+                    Span(" - " + status.value.reasonPhrase.capitalized)
+                        .class("name")
+                    
+                    Span(status.info)
+                        .class("reason")
+                }
+                .class("httpStatus\(String(status.value.code / 100))xx")
+            }
+        }
+        .class("response-codes")
+        
+        H4("Headers")
+        render(headers: endpoint.response.headers)
+        
+        H4("Body")
+        render(objects: endpoint.response.body)
     }
 }

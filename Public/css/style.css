@@ -18,47 +18,86 @@ h1 b {
     color: var(--primary-color);
 }
 h2 {
-    margin-bottom: 24px;
-    font-weight: normal;
+    color: var(--primary-color);
     font-size: 30px;
+    margin-bottom: 8px;
 }
 h3 {
-    margin-top: 32px;
-    margin-bottom: 24px;
-    font-weight: normal;
-    font-size: 24px;   
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 8px;
 }
-* + h3 {
-    margin-top: 64px;
+a {
+    color: var(--primary-color);
 }
-h4 { 
-    margin-top: 32px;
-}
-h2 a {
-    text-decoration: none;
-}
-h2, h3, h4, h5, a {
-	color: var(--primary-color);
-}
-header {
+body > header {
 	text-align: center;
 	max-width: 800px;
 	margin: 128px auto;
 }
-section {
+.wrapper {
 	padding: 64px;
+    background: var(--secondary-background-color);
+}
+.container {
+    max-width: 800px;
+    margin: auto;
 }
 footer {
-	padding-top: 48px;
+	padding: 64px;
 	text-align: center;
 }
-footer p {
-	margin: 16px;
+.endpoint {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 12px;
 }
+
+.endpoint > header {
+    position: relative;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 8px;
+}
+.endpoint > header:hover {
+    cursor: pointer;
+}
+.endpoint > header img {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+.endpoints + .group-info {
+    margin-top: 64px;
+}
+.group-info {
+    margin-bottom: 16px;
+}
+.endpoint .details-wrapper {
+    border-top: 1px solid #ccc;
+}
+.endpoint .details {
+    padding: 16px;
+}
+.endpoint .details header {
+    margin-bottom: 16px;
+}
+
+
+
+
+
+
 textarea.original-code {
     visibility: hidden;
     display: none;
 }
+
+
+
+
+
+
 pre {
     padding: 16px 32px;
     overflow-x: scroll;
@@ -82,61 +121,20 @@ pre code .highlight {
 pre code .highlight.shifted {
     margin-left: 0;
 }
-section {
-    background: var(--secondary-background-color);
 
-}
-.container {
-    max-width: 800px;
-    margin: auto;
-}
 
-dt {
-    font-weight: bold;
-    margin-bottom: 16px;
-}
-dd {
-    padding-bottom: 48px;
-    margin-bottom: 48px;
-    
-}
-.grid-2, .grid-3, .grid-221, .grid-321 {    
-	display: grid;
-    column-gap: 32px;
-    row-gap: 32px;
-}
-.grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-.grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-}
-.grid-2 > *, .grid-3 > *, .grid-221 > *, .grid-321 > * {
-    grid-column: span 1;
-}
-.grid-221, .grid-321 {
-    grid-template-columns: repeat(1, 1fr);
-}
-@media screen and (min-width: 800px) {
-    .grid-221, .grid-321 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media screen and (min-width: 1200px) {
-    .grid-221 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .grid-321 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
 
-.method {
+
+
+.method{
+    text-transform: uppercase;
     background: black;
     color: #fff;
     padding: 4px 8px;
     border-radius: 4px;
-    margin-right: 8px;
+    margin-right: 4px;
+    font-size: 16px;
+    line-height: 24px;
 }
 .method.get {
     background: #3374B6;
@@ -157,35 +155,28 @@ dd {
     margin: 32px 0;
 }
 .response-codes li, .parameters li {
+    background: var(--secondary-background-color);
     position: relative;
     list-style-type: none;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
+    padding: 12px;
+/*    border-radius: 4px;*/
+    margin-bottom: 1px;
 }
 .httpStatus2xx {
-    background: #F1F8F6;
-    border: 1px solid #81AB9D;
-/*    box-shadow: 0px 0px 3px #F1F8F6;*/
-/*    color: #57746A;*/
+/*    background: #F1F8F6;*/
+/*    border: 1px solid #81AB9D;*/
 }
 .httpStatus3xx {
-    background: #F4F7FF;
-    border: 1px solid #5169A7;
-/*    box-shadow: 0px 0px 3px #F4F7FF;*/
-/*    color: #3D5390;*/
+/*    background: #F4F7FF;*/
+/*    border: 1px solid #5169A7;*/
 }
 .httpStatus4xx {
-    background: #FFFAF0;
-    border: 1px solid #D5B474;
-/*    box-shadow: 0px 0px 3px #FFFAF0;*/
-/*    color: #896B31;*/
+/*    background: #FFFAF0;*/
+/*    border: 1px solid #D5B474;*/
 }
 .httpStatus5xx {
-    background: #FDF4F5;
-    border: 1px solid #995B5D;
-/*    box-shadow: 0px 0px 3px #FDF4F5;*/
-/*    color: #814444;*/
+/*    background: #FDF4F5;*/
+/*    border: 1px solid #995B5D;*/
 }
 .response-codes .reason, .parameters .description {
     position: absolute;
@@ -194,33 +185,70 @@ dd {
 .parameters {
     margin-top: 16px;
 }
-.parameters li {
-    border: 1px solid #ccc;
-}
 .parameters .required {
     font-weight: bold;
 }
 
-span.type.uuid { color: blue; }
-span.type.string { color: blue; }
-span.type.int { color: blue; }
-span.type.bool { color: blue; }
-span.type.double { color: blue; }
-span.type.array { color: blue; }
-span.type.object { color: blue; }
+span.type.uuid { color: var(--primary-color); }
+span.type.string { color: var(--primary-color); }
+span.type.int { color: var(--primary-color); }
+span.type.bool { color: var(--primary-color); }
+span.type.double { color: var(--primary-color); }
+span.type.array { color: var(--primary-color); }
+span.type.object { color: var(--primary-color); }
 
-dl {
-    display: none;
-    display: block;
+
+pre {
+    background: var(--secondary-background-color);
 }
-* + h2 {
-    margin-top: 64px;
-}
-h3 {
-    border-bottom: 1px solid #ccc;
-    margin: 16px 0;
-}
-h3:hover {
-    cursor: pointer;
+.tab {
     
 }
+.tab button {
+    font-size: 16px;
+    display: inline-block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: 0.3s;
+    margin-right: 8px;
+    background: #fff;
+    color: #999;
+}
+.tab button:hover {
+    background-color: var(--primary-background-color);
+    color: var(--primary-color);
+}
+.tab button.active {
+    background-color: var(--primary-background-color);
+    color: #000;
+}
+.tabcontent {
+    position: relative;
+    background: var(--primary-background-color);
+    padding: 16px;
+    display: none;
+}
+.tabcontent.first {
+    display: block;
+}
+
+.copy-button {
+    position: absolute;
+    top: 40px;
+    right: 22px;
+    padding: 8px 16px;
+    border: none;
+    background: var(--primary-background-color);
+    font-weight: bold;
+    border-radius: 32px;
+    width: 80px;
+    border: 1px solid #ccc;
+    text-transform: uppercase;
+}
+.copy-button:hover {
+    cursor: pointer;
+}
+
+
