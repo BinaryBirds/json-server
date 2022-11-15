@@ -21,6 +21,11 @@ extension Endpoint {
                 info: "Post management - list, create, update, delete, etc.",
                 endpoints: postEndpoints
             ),
+            Group(
+                name: "Tag",
+                info: "Tag management - list, create, update, delete, etc.",
+                endpoints: tagEndpoints
+            ),
         ]
     }
 }
