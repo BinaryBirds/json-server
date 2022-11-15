@@ -76,7 +76,8 @@ extension Endpoint {
                         key: "Content-Type",
                         value: "application/json",
                         info: "Indicates that the response is a JSON object.",
-                        isRequired: true),
+                        isRequired: true
+                    ),
                 ],
                 body: [
                     .init(
@@ -182,7 +183,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -X GET http://localhost:8080/api/v1/user/me \
-                     -H "Authorization: Bearer <TOKEN>" \
+                     -H "Authorization: Bearer [TOKEN]" \
                      -H "Accept: application/json"
                 """###
             ),

@@ -11,8 +11,16 @@ extension Endpoint {
     
     static var api: [Group] {
         [
-            Group(name: "User", info: "User related endpoints", endpoints: userEndpoints),
-            Group(name: "Post", info: "Post related endpoints", endpoints: postEndpoints),
+            Group(
+                name: "User",
+                info: "User authentication and profile details.",
+                endpoints: userEndpoints
+            ),
+            Group(
+                name: "Post",
+                info: "Post management - list, create, update, delete, etc.",
+                endpoints: postEndpoints
+            ),
         ]
     }
 }

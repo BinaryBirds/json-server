@@ -14,9 +14,8 @@ function copySnippet(id) {
 
 function toggleElement(id) {
     const x = document.getElementById(id);
-    
-//    console.warn(x.style.display)
-    if (x.style.display == "" || x.style.display == "block") {
+
+    if (x.style.display == "block") {
         x.style.display = "none";
     }
     else {
