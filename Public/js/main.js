@@ -13,15 +13,10 @@ function copySnippet(id) {
 }
 
 function toggleElement(id) {
-    // hide everything
-//    const elements = document.getElementsByTagName("dl")
-//    for (let i = 0; i < elements.length; i++) {
-//        elements[i].style.display = "none";
-//    }
-
     const x = document.getElementById(id);
     
-    if (x.style.display == "block") {
+//    console.warn(x.style.display)
+    if (x.style.display == "" || x.style.display == "block") {
         x.style.display = "none";
     }
     else {

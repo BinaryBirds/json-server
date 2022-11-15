@@ -41,7 +41,7 @@ body > header {
 	margin: 128px auto;
 }
 .wrapper {
-	padding: 64px;
+    padding: 16px;
     background: var(--secondary-background-color);
 }
 .container {
@@ -110,6 +110,7 @@ textarea.original-code {
 }
 .object header h5 {
     font-size: 18px;
+    margin-bottom: 4px;
 }
 
 pre {
@@ -169,7 +170,6 @@ pre code .highlight.shifted {
     position: relative;
     list-style-type: none;
     padding: 12px;
-/*    border-radius: 4px;*/
     margin-bottom: 1px;
 }
 .httpStatus2xx {
@@ -182,20 +182,23 @@ pre code .highlight.shifted {
     border-left: 4px solid var(--red-color);
 }
 .response-codes .reason, .parameters .description {
-    position: absolute;
-    right: 10px;
+    display: block;
+    margin-top: 4px;
+    color: #999;
+/*    font-size: 14px;*/
 }
 .parameters .required {
     font-weight: bold;
 }
 
-span.type.uuid { color: var(--blue-color); }
-span.type.string { color: var(--blue-color); }
+
+span.type.uuid { color: var(--green-color); }
+span.type.string { color: var(--orange-color); }
+span.type.bool { color: var(--purple-color); }
 span.type.int { color: var(--blue-color); }
-span.type.bool { color: var(--blue-color); }
 span.type.double { color: var(--blue-color); }
-span.type.array { color: var(--blue-color); }
-span.type.object { color: var(--blue-color); }
+span.type.array { color: var(--green-color); }
+span.type.object { color: var(--green-color); }
 
 
 pre {
@@ -236,15 +239,15 @@ pre {
 
 .copy-button {
     position: absolute;
-    top: 40px;
+    top: 60px;
     right: 22px;
     padding: 8px 16px;
     border: none;
     background: var(--primary-background-color);
+    color: var(--primary-text-color);
     font-weight: bold;
-    border-radius: 32px;
+/*    border-radius: 4px;*/
     width: 80px;
-    border: 1px solid var(--border-color);
     text-transform: uppercase;
 }
 .copy-button:hover {

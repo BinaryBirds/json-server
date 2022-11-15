@@ -115,7 +115,7 @@ extension Endpoint {
                     .init(name: "UserLoginResponse", info: "response object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
                         .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .string, isRequired: true, info: "User"),
+                        .init(name: "user", type: .object, isRequired: true, info: "User"),
                     ]),
                     .init(name: "User", info: "user object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
@@ -179,7 +179,7 @@ extension Endpoint {
                     .init(name: "UserLoginResponse", info: "response object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
                         .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .string, isRequired: true, info: "User"),
+                        .init(name: "user", type: .object, isRequired: true, info: "User"),
                     ]),
                     .init(name: "User", info: "user object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
@@ -243,7 +243,7 @@ extension Endpoint {
                     .init(name: "UserLoginResponse", info: "response object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
                         .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .string, isRequired: true, info: "User"),
+                        .init(name: "user", type: .object, isRequired: true, info: "User"),
                     ]),
                     .init(name: "User", info: "user object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
@@ -307,7 +307,7 @@ extension Endpoint {
                     .init(name: "UserLoginResponse", info: "response object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
                         .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .string, isRequired: true, info: "User"),
+                        .init(name: "user", type: .object, isRequired: true, info: "User"),
                     ]),
                     .init(name: "User", info: "user object", parameters: [
                         .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),

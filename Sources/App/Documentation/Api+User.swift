@@ -12,16 +12,22 @@ extension Endpoint {
     @EndpointBuilder
     static var userEndpoints: [Endpoint] {
         Endpoint(
-            name: "user login",
+            name: "User login",
             method: .post,
             path: "/api/v1/user/login/",
-            info: "Log in with a given account",
+            info: "Log in with a given user account credentials (email, password).",
             request: .init(
                 queryParams: [
-                    .init(name: "foo", type: .string, isRequired: true, info: "foo info")
+                    .init(name: "uuid", type: .uuid, isRequired: true, info: "User email address"),
+                    .init(name: "email", type: .string, isRequired: true, info: "User email address"),
+                    .init(name: "integer", type: .int, isRequired: true, info: "User password"),
+                    .init(name: "boolean", type: .bool, isRequired: false, info: "User password"),
+                    .init(name: "array", type: .array, isRequired: false, info: "User password"),
+                    .init(name: "double", type: .double, isRequired: false, info: "User password"),
+                    .init(name: "object", type: .object, isRequired: true, info: "User password"),
                 ],
                 headers: [
-                    .init(key: "Content Type", value: "application/json", info: "JSON", isRequired: true),
+                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: true),
                 ],
                 body: [
                     .init(name: "UserLoginRequest", info: "request object", parameters: [
