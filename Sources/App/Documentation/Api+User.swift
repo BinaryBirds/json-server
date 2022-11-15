@@ -31,7 +31,7 @@ extension Endpoint {
                         key: "Accept",
                         value: "application/json",
                         info: "Standard accept header to indicate that we only accept a JSON response.",
-                        isRequired: true
+                        isRequired: false
                     ),
                 ],
                 body: [
@@ -137,10 +137,10 @@ extension Endpoint {
                     "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
                     "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
                     "user": {
-                        "email": "root@localhost.com",
                         "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
+                        "email": "root@localhost.com",
+                        "name": "Root User",
+                        "imageUrl": "https://placekitten.com/256/256"
                     }
                 }
                 """###
@@ -158,28 +158,20 @@ extension Endpoint {
                 queryParams: [
                 ],
                 headers: [
-                    .init(key: "Authorization", value: "Bearer [TOKEN]", info: "Bearer token", isRequired: true),
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .init(
+                        key: "Authorization",
+                        value: "Bearer [TOKEN]",
+                        info: "You have to provide a Bearer token using this header field to access this endpoint.",
+                        isRequired: true
+                    ),
+                    .init(
+                        key: "Accept",
+                        value: "application/json",
+                        info: "Standard accept header to indicate that we only accept a JSON response.",
+                        isRequired: false
+                    ),
                 ],
                 body: [
-                    .init(
-                        name: "UserLoginRequest",
-                        info: "A simple login request object containing the user credentials",
-                        parameters: [
-                            .init(
-                                name: "email",
-                                type: .string,
-                                isRequired: true,
-                                info: "Email address"
-                            ),
-                            .init(
-                                name: "password",
-                                type: .string,
-                                isRequired: true,
-                                info: "Login password"),
-                        ]
-                    ),
                 ],
                 example: ###"""
                 curl -X GET http://localhost:8080/api/v1/user/me \
@@ -189,36 +181,50 @@ extension Endpoint {
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .init(value: .ok, info: "Indicates a successful response."),
+                    .init(value: .unauthorized, info: "Indicates an unauthorized request attempt."),
                 ],
                 headers: [
                     .init(key: "Content Type", value: "application/json", info: "JSON", isRequired: true),
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .string, isRequired: true, info: "User"),
-                        .init(name: "user", type: .int, isRequired: true, info: "User"),
-                        .init(name: "user", type: .double, isRequired: true, info: "User"),
-                        .init(name: "user", type: .bool, isRequired: true, info: "User"),
-                        .init(name: "user", type: .array, isRequired: true, info: "User"),
-                        .init(name: "user", type: .object, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+                    .init(
+                        name: "User",
+                        info: "The user account detail object.",
+                        parameters: [
+                            .init(
+                                name: "id",
+                                type: .uuid,
+                                isRequired: true,
+                                info: "Unique user identifier."
+                            ),
+                            .init(
+                                name: "email",
+                                type: .string,
+                                isRequired: true,
+                                info: "Email address of the user account."
+                            ),
+                            .init(
+                                name: "name",
+                                type: .string,
+                                isRequired: false,
+                                info: "Name of the user."
+                            ),
+                            .init(
+                                name: "imageUrl",
+                                type: .string,
+                                isRequired: false,
+                                info: "Profile picture URL for the given user account."
+                            ),
+                        ]
+                    ),
                 ],
                 example: ###"""
                 {
-                  "email": "root@localhost.com",
-                  "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                  "imageUrl": "https://placekitten.com/256/256",
-                  "name": "Root User"
+                    "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
+                    "email": "root@localhost.com",
+                    "name": "Root User",
+                    "imageUrl": "https://placekitten.com/256/256"
                 }
                 """###
             )
