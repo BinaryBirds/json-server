@@ -37,6 +37,11 @@ struct IndexTemplate {
                 
                 Div {
                     Div {
+                        H2("Base URL")
+                        P("http://localhost:8080/api/v1/")
+                        Br()
+                        Br()
+
                         for (groupIndex, group) in groups.enumerated() {
                             Header {
                                 H2(group.name)
@@ -242,64 +247,77 @@ private extension IndexTemplate {
     
     @TagBuilder
     static func requestBlock(_ endpoint: Endpoint) -> SwiftHtml.Tag {
-        H4("Query parameters")
-        Ul {
-            for param in endpoint.request.queryParams {
-                Li {
-                    if param.isRequired {
-                        Span {
+        
+        if !endpoint.request.queryParams.isEmpty {
+            H4("Query parameters")
+            Ul {
+                for param in endpoint.request.queryParams {
+                    Li {
+                        if param.isRequired {
+                            Span {
+                                Span(param.name)
+                                    .class("name")
+                                Span(": " + param.type.htmlValue)
+                                    .class("type")
+                            }
+                            .class("required")
+                        }
+                        else {
                             Span(param.name)
                                 .class("name")
                             Span(": " + param.type.htmlValue)
                                 .class("type")
                         }
-                        .class("required")
+                        Span(param.info)
+                            .class("description")
                     }
-                    else {
-                        Span(param.name)
-                            .class("name")
-                        Span(": " + param.type.htmlValue)
-                            .class("type")
-                    }
-                    Span(param.info)
-                        .class("description")
+                    
                 }
-                
             }
+            .class("parameters", "content-block")
         }
-        .class("parameters", "content-block")
         
-        H4("Headers")
-        render(headers: endpoint.request.headers)
-        
-        H4("Body")
-        render(objects: endpoint.request.body)
+        if !endpoint.request.headers.isEmpty {
+            H4("Headers")
+            render(headers: endpoint.request.headers)
+        }
+
+        if !endpoint.request.body.isEmpty {
+            H4("Body")
+            render(objects: endpoint.request.body)
+        }
     }
     
     @TagBuilder
     static func responseBlock(_ endpoint: Endpoint) -> SwiftHtml.Tag {
         
-        H4("Status codes")
-        Ul {
-            for status in endpoint.response.statusCodes {
-                Li {
-                    Span(String(status.value.code))
-                        .class("code")
-                    Span(" - " + status.value.reasonPhrase.capitalized)
-                        .class("name")
-                    
-                    Span(status.info)
-                        .class("reason")
+        if !endpoint.response.statusCodes.isEmpty {
+            H4("Status codes")
+            Ul {
+                for status in endpoint.response.statusCodes {
+                    Li {
+                        Span(String(status.value.code))
+                            .class("code")
+                        Span(" - " + status.value.reasonPhrase.capitalized)
+                            .class("name")
+                        
+                        Span(status.info)
+                            .class("reason")
+                    }
+                    .class("httpStatus\(String(status.value.code / 100))xx")
                 }
-                .class("httpStatus\(String(status.value.code / 100))xx")
             }
+            .class("response-codes", "content-block")
         }
-        .class("response-codes", "content-block")
         
-        H4("Headers")
-        render(headers: endpoint.response.headers)
+        if !endpoint.response.headers.isEmpty {
+            H4("Headers")
+            render(headers: endpoint.response.headers)
+        }
         
-        H4("Body")
-        render(objects: endpoint.response.body)
+        if !endpoint.response.body.isEmpty {
+            H4("Body")
+            render(objects: endpoint.response.body)
+        }
     }
 }

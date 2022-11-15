@@ -105,7 +105,7 @@ textarea.original-code {
 }
 .object header {
     background: var(--secondary-background-color);
-    padding: 16px;
+    padding: 16px 12px;
     margin-bottom: 1px !important;
 }
 .object header h5 {
