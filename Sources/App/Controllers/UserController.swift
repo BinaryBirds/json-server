@@ -25,7 +25,7 @@ struct UserController: RouteCollection {
     
     /**
      ```sh
-     curl -X POST http://localhost:8080/user/login \
+     curl -X POST http://localhost:8080/api/v1/user/login/ \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
@@ -60,7 +60,7 @@ struct UserController: RouteCollection {
     
     /**
      ```sh
-     curl -X GET http://localhost:8080/user/me \
+     curl -X GET http://localhost:8080/api/v1/user/me/ \
          -H "Authorization: Bearer TOKEN" \
          -H "Accept: application/json" \
          |jq
@@ -83,7 +83,7 @@ struct UserController: RouteCollection {
     
     /**
      ```sh
-     curl -X PUT http://localhost:8080/user/me \
+     curl -X PUT http://localhost:8080/api/v1/user/me/ \
          -H "Authorization: Bearer TOKEN" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
@@ -123,7 +123,7 @@ struct UserController: RouteCollection {
     
     /**
      ```sh
-     curl -X PATCH http://localhost:8080/user/me \
+     curl -X PATCH http://localhost:8080/api/v1/user/me/ \
          -H "Authorization: Bearer TOKEN" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \

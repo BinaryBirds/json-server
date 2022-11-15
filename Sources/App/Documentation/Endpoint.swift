@@ -34,16 +34,66 @@ extension Endpoint {
 
 extension Endpoint {
     
-    enum DataType: String {
+    enum DataType: RawRepresentable {
+        typealias RawValue = String
+
         case uuid
-        case string
-        case int
         case bool
+        case int
         case double
-        case array
-        case object
+        case string
+        case array(String)
+        case object(String)
         
-        var name: String {
+        // MARK: - raw representable
+
+        var rawValue: String {
+            switch self {
+            case .uuid:
+                return "uuid"
+            case .bool:
+                return "bool"
+            case .int:
+                return "int"
+            case .double:
+                return "double"
+            case .string:
+                return "string"
+            case .array(let value):
+                return "array(" + value + ")"
+            case .object(let value):
+                return "object(" + value + ")"
+            }
+        }
+        
+        init?(rawValue: String) {
+            switch rawValue {
+            case "uuid":
+                self = .uuid
+            case "bool":
+                self = .bool
+            case "int":
+                self = .int
+            case "double":
+                self = .double
+            case "string":
+                self = .string
+            default:
+                if rawValue.hasPrefix("array") {
+                    let value = String(rawValue.dropFirst(6).dropLast(1))
+                    self = .array(value)
+                }
+                if rawValue.hasPrefix("object") {
+                    let value = String(rawValue.dropFirst(7).dropLast(1))
+                    self = .object(value)
+                }
+            }
+            return nil
+        }
+
+        // MARK: -
+        
+        var rawName: String {
             switch self {
             case .uuid:
                 return rawValue.uppercased()
@@ -52,8 +102,30 @@ extension Endpoint {
             }
         }
         
+        var rawType: String {
+            switch self {
+            case .array(_):
+                return "array"
+            case .object(_):
+                return "object"
+            default:
+                return rawValue
+            }
+        }
+        
+        var name: String {
+            switch self {
+            case .array(let value):
+                return "[" + value + "]"
+            case .object(let value):
+                return value
+            default:
+                return rawName
+            }
+        }
+
         var htmlValue: String {
-            "<span class=\"type \(rawValue)\">\(name)</span>"
+            "<span class=\"type \(rawType)\">\(name)</span>"
         }
     }
 }
@@ -63,7 +135,7 @@ extension Endpoint {
         let key: String
         let value: String
         let info: String
-        let isRequired: Bool
+        let isMandatory: Bool
     }
 }
 
@@ -71,7 +143,7 @@ extension Endpoint {
     struct Parameter {
         let name: String
         let type: DataType
-        let isRequired: Bool
+        let isMandatory: Bool
         let info: String
     }
 }
@@ -92,7 +164,7 @@ extension Endpoint {
         struct QueryParam {
             let name: String
             let type: DataType
-            let isRequired: Bool
+            let isMandatory: Bool
             let info: String
         }
         

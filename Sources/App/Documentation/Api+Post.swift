@@ -20,42 +20,32 @@ extension Endpoint {
                 queryParams: [
                     .init(
                         name: "tagIds",
-                        type: .array,
-                        isRequired: false,
+                        type: .array("UUID"),
+                        isMandatory: false,
                         info: "Array of tag identifiers. (e.g. ?tagIds[]=UUID1&tagIds[]=UUID2)"
                     ),
                     .init(
                         name: "search",
                         type: .string,
-                        isRequired: false,
+                        isMandatory: false,
                         info: "Search string that uses the post title and excerpt to look up posts."
                     ),
                     .init(
                         name: "from",
                         type: .string,
-                        isRequired: false,
+                        isMandatory: false,
                         info: "Lists post from a given start date. (e.g. ?from=2022-10-28T20:05:51Z)"
                     ),
                     .init(
                         name: "to",
                         type: .string,
-                        isRequired: false,
+                        isMandatory: false,
                         info: "Lists post until a given end date.  (e.g. ?to=2022-10-29T20:05:51Z)"
                     ),
                 ],
                 headers: [
-                    .init(
-                        key: "Content-Type",
-                        value: "application/json",
-                        info: "Standard content type header to indicate request body type.",
-                        isRequired: true
-                    ),
-                    .init(
-                        key: "Accept",
-                        value: "application/json",
-                        info: "Standard accept header to indicate that we only accept a JSON response.",
-                        isRequired: true
-                    ),
+                    .contentTypeBody,
+                    .accept,
                 ],
                 body: [
                 ],
@@ -73,36 +63,117 @@ extension Endpoint {
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .ok,
+                    .unauthorized,
                 ],
                 headers: [
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .contentTypeResponse,
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .string, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+                    .init(
+                        name: "PagedPostResponse",
+                        info: "The object containing the page items and the pagination metadata.",
+                        parameters: [
+                            .init(
+                                name: "items",
+                                type: .array("PostListItem"),
+                                isMandatory: true,
+                                info: "The array of post list items."
+                            ),
+                            .init(
+                                name: "metadata",
+                                type: .object("PageMetadata"),
+                                isMandatory: true,
+                                info: "The page metadata object"
+                            ),
+                        ]
+                    ),
+                    .init(
+                        name: "PageMetadata",
+                        info: "The object containing the page metadata details.",
+                        parameters: [
+                            .init(
+                                name: "per",
+                                type: .int,
+                                isMandatory: true,
+                                info: "The number of items per page."
+                            ),
+                            .init(
+                                name: "total",
+                                type: .int,
+                                isMandatory: true,
+                                info: "The total number of items."
+                            ),
+                            .init(
+                                name: "page",
+                                type: .int,
+                                isMandatory: true,
+                                info: "The current page index."
+                            ),
+                        ]
+                    ),
+                    
+                    .init(
+                        name: "PostListItem",
+                        info: "The list item containing the basic post data.",
+                        parameters: [
+                            .init(
+                                name: "id",
+                                type: .uuid,
+                                isMandatory: true,
+                                info: "Unique identifier of the post object."
+                            ),
+                            .init(
+                                name: "title",
+                                type: .string,
+                                isMandatory: true,
+                                info: "Title of the post object."
+                            ),
+                            .init(
+                                name: "imageUrl",
+                                type: .string,
+                                isMandatory: true,
+                                info: "The associated image URL of the post item."
+                            ),
+                            .init(
+                                name: "excerpt",
+                                type: .string,
+                                isMandatory: true,
+                                info: "Short description about the post item."
+                            ),
+                            .init(
+                                name: "date",
+                                type: .string,
+                                isMandatory: true,
+                                info: "Publication date of the post item."
+                            ),
+                        ]
+                    ),
                 ],
                 example: ###"""
                 {
-                    "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
-                    "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
-                    "user": {
-                        "email": "root@localhost.com",
-                        "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
+                  "items": [
+                    {
+                      "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
+                      "title": "Post #1",
+                      "imageUrl": "https://placekitten.com/640/360",
+                      "excerpt": "Excerpt #1",
+                      "date": "2022-10-31T11:25:30Z"
+                    },
+                    /* ... */
+                    {
+                      "id": "91007F7C-DFC5-46EE-BA67-3865628EBC60",
+                      "title": "Post #10",
+                      "imageUrl": "https://placekitten.com/640/360",
+                      "excerpt": "Excerpt #10",
+                      "date": "2022-10-22T11:25:30Z"
                     }
+                  ],
+                  "metadata": {
+                    "per": 10,
+                    "total": 28,
+                    "page": 1
+                  }
                 }
                 """###
             )
@@ -113,61 +184,52 @@ extension Endpoint {
         Endpoint(
             name: "Get post details",
             method: .get,
-            path: "/posts/[id]",
+            path: "/posts/[id]/",
             info: "Get the details of a single post object using an identifier.",
             request: .init(
                 queryParams: [
                     
                 ],
                 headers: [
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .accept,
                 ],
                 body: [
                 ],
                 example: ###"""
-                curl -X POST http://localhost:8080/api/v1/user/login/ \
-                    -H "Content-Type: application/json" \
-                    -H "Accept: application/json" \
-                    --data-raw '
-                    {
-                        "email": "root@localhost.com",
-                        "password": "ChangeMe1"
-                    }
-                    '
+                curl -X GET http://localhost:8080/api/v1/posts/[id]/ \
+                    -H "Accept: application/json"
                 """###
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .ok,
+                    .unauthorized,
                 ],
                 headers: [
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
+                    .contentTypeResponse,
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .object, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+                    .postDetail,
+                    .tagList,
                 ],
                 example: ###"""
                 {
-                    "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
-                    "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
-                    "user": {
-                        "email": "root@localhost.com",
-                        "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
-                    }
+                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
+                    "title": "Post #1",
+                    "imageUrl": "https://placekitten.com/640/360",
+                    "date": "2022-10-31T11:25:30Z",
+                    "excerpt": "Excerpt #1",
+                    "content": "Content #1",
+                    "tags": [
+                        {
+                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                            "name": "Orange"
+                        },
+                        {
+                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                            "name": "Red"
+                        }
+                    ]
                 }
                 """###
             )
@@ -178,64 +240,69 @@ extension Endpoint {
         Endpoint(
             name: "Create a new post",
             method: .post,
-            path: "/posts/[id]",
-            info: "Create a new post",
+            path: "/posts/",
+            info: "Creates a new post item and returns the created object.",
             request: .init(
                 queryParams: [
-                    .init(name: "foo", type: .string, isRequired: true, info: "foo info")
                 ],
                 headers: [
-                    .init(key: "Authorization", value: "Bearer [TOKEN]", info: "Bearer token", isRequired: true),
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .authorization,
+                    .contentTypeBody,
+                    .accept,
                 ],
                 body: [
+                    .postInput(),
                 ],
                 example: ###"""
-                curl -X POST http://localhost:8080/api/v1/user/login/ \
-                    -H "Content-Type: application/json" \
-                    -H "Accept: application/json" \
-                    --data-raw '
-                    {
-                        "email": "root@localhost.com",
-                        "password": "ChangeMe1"
-                    }
+                  curl -X POST http://localhost:8080/api/v1/posts/ \
+                      -H "Authorization: Bearer [TOKEN]" \
+                      -H "Content-Type: application/json" \
+                      -H "Accept: application/json" \
+                      --data-raw '
+                      {
+                          "imageUrl": "https://placekitten.com/640/360",
+                          "title": "Lorem ipsum",
+                          "excerpt": "Lorem ipsum",
+                          "date": "2022-10-27T20:05:51Z",
+                          "content": "Lorem ipsum dolor sit amet",
+                          "tagIds": [
+                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
+                          ]
+                      }
+                      '
                     '
                 """###
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .ok,
+                    .unauthorized,
                 ],
                 headers: [
-                    .init(key: "Authorization", value: "Bearer [TOKEN]", info: "Bearer token", isRequired: true),
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .contentTypeResponse,
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .object, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+                    .postDetail,
+                    .tagList,
                 ],
                 example: ###"""
                 {
-                    "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
-                    "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
-                    "user": {
-                        "email": "root@localhost.com",
-                        "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
-                    }
+                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
+                    "title": "Post #1",
+                    "imageUrl": "https://placekitten.com/640/360",
+                    "date": "2022-10-31T11:25:30Z",
+                    "excerpt": "Excerpt #1",
+                    "content": "Content #1",
+                    "tags": [
+                        {
+                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                            "name": "Orange"
+                        },
+                        {
+                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                            "name": "Red"
+                        }
+                    ]
                 }
                 """###
             )
@@ -244,64 +311,71 @@ extension Endpoint {
         // MARK: -
         
         Endpoint(
-            name: "Update post",
+            name: "Update an existing post",
             method: .put,
-            path: "/post/[id]",
-            info: "List all the available posts",
+            path: "/posts/[id]/",
+            info: "Updates an existing post object with new data values based on the input.",
             request: .init(
                 queryParams: [
-                    .init(name: "foo", type: .string, isRequired: true, info: "foo info")
                 ],
                 headers: [
-                    .init(key: "Authorization", value: "Bearer [TOKEN]", info: "Bearer token", isRequired: true),
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .authorization,
+                    .contentTypeBody,
+                    .accept,
                 ],
                 body: [
+                    .postInput(),
                 ],
                 example: ###"""
-                curl -X POST http://localhost:8080/api/v1/user/login/ \
-                    -H "Content-Type: application/json" \
-                    -H "Accept: application/json" \
-                    --data-raw '
-                    {
-                        "email": "root@localhost.com",
-                        "password": "ChangeMe1"
-                    }
+                  curl -X PUT http://localhost:8080/api/v1/posts/[id]/ \
+                      -H "Authorization: Bearer [TOKEN]" \
+                      -H "Content-Type: application/json" \
+                      -H "Accept: application/json" \
+                      --data-raw '
+                      {
+                          "imageUrl": "https://placekitten.com/640/360",
+                          "title": "Lorem ipsum",
+                          "excerpt": "Lorem ipsum",
+                          "date": "2022-10-27T20:05:51Z",
+                          "content": "Lorem ipsum dolor sit amet",
+                          "tagIds": [
+                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
+                          ]
+                      }
+                      '
                     '
                 """###
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .ok,
+                    .unauthorized,
                 ],
                 headers: [
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
+                    .contentTypeResponse,
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .object, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+                    .postDetail,
+                    .tagList,
                 ],
                 example: ###"""
                 {
-                    "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
-                    "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
-                    "user": {
-                        "email": "root@localhost.com",
-                        "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
-                    }
+                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
+                    "title": "Post #1",
+                    "imageUrl": "https://placekitten.com/640/360",
+                    "date": "2022-10-31T11:25:30Z",
+                    "excerpt": "Excerpt #1",
+                    "content": "Content #1",
+                    "tags": [
+                        {
+                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                            "name": "Orange"
+                        },
+                        {
+                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                            "name": "Red"
+                        }
+                    ]
                 }
                 """###
             )
@@ -310,64 +384,71 @@ extension Endpoint {
         // MARK: -
         
         Endpoint(
-            name: "Patch post",
+            name: "Patch an existing post",
             method: .patch,
-            path: "/post/[id]",
-            info: "List all the available posts",
+            path: "/posts/[id]/",
+            info: "Patch an existing post item using an input object.",
             request: .init(
                 queryParams: [
-                    .init(name: "foo", type: .string, isRequired: true, info: "foo info")
                 ],
                 headers: [
-                    .init(key: "Authorization", value: "Bearer [TOKEN]", info: "Bearer token", isRequired: true),
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .authorization,
+                    .contentTypeBody,
+                    .accept,
                 ],
                 body: [
+                    .postInput(isPatch: true),
                 ],
                 example: ###"""
-                curl -X POST http://localhost:8080/api/v1/user/login/ \
-                    -H "Content-Type: application/json" \
-                    -H "Accept: application/json" \
-                    --data-raw '
-                    {
-                        "email": "root@localhost.com",
-                        "password": "ChangeMe1"
-                    }
+                  curl -X POST http://localhost:8080/api/v1/posts/ \
+                      -H "Authorization: Bearer [TOKEN]" \
+                      -H "Content-Type: application/json" \
+                      -H "Accept: application/json" \
+                      --data-raw '
+                      {
+                          "imageUrl": "https://placekitten.com/640/360",
+                          "title": "Lorem ipsum",
+                          "excerpt": "Lorem ipsum",
+                          "date": "2022-10-27T20:05:51Z",
+                          "content": "Lorem ipsum dolor sit amet",
+                          "tagIds": [
+                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
+                          ]
+                      }
+                      '
                     '
                 """###
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .ok,
+                    .unauthorized,
                 ],
                 headers: [
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
+                    .contentTypeResponse,
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .object, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+                    .postDetail,
+                    .tagList,
                 ],
                 example: ###"""
                 {
-                    "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
-                    "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
-                    "user": {
-                        "email": "root@localhost.com",
-                        "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
-                    }
+                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
+                    "title": "Post #1",
+                    "imageUrl": "https://placekitten.com/640/360",
+                    "date": "2022-10-31T11:25:30Z",
+                    "excerpt": "Excerpt #1",
+                    "content": "Content #1",
+                    "tags": [
+                        {
+                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                            "name": "Orange"
+                        },
+                        {
+                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                            "name": "Red"
+                        }
+                    ]
                 }
                 """###
             )
@@ -378,63 +459,36 @@ extension Endpoint {
         Endpoint(
             name: "Delete post",
             method: .delete,
-            path: "/posts/[id]",
-            info: "List all the available posts",
+            path: "/posts/[id]/",
+            info: "Removes an existing post item including the tag association links.",
             request: .init(
                 queryParams: [
-                    .init(name: "foo", type: .string, isRequired: true, info: "foo info")
                 ],
                 headers: [
-                    .init(key: "Authorization", value: "Bearer [TOKEN]", info: "Bearer token", isRequired: true),
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
-                    .init(key: "Accept", value: "application/json", info: "JSON", isRequired: false),
+                    .authorization,
                 ],
                 body: [
                 ],
                 example: ###"""
-                curl -X POST http://localhost:8080/api/v1/user/login/ \
-                    -H "Content-Type: application/json" \
-                    -H "Accept: application/json" \
-                    --data-raw '
-                    {
-                        "email": "root@localhost.com",
-                        "password": "ChangeMe1"
-                    }
-                    '
+                curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/ \
+                    -H "Authorization: Bearer [TOKEN]"
                 """###
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .ok, info: "Succesful log in"),
-                    .init(value: .movedPermanently, info: "Moved"),
-                    .init(value: .notFound, info: "Not found"),
-                    .init(value: .internalServerError, info: "ERRROR"),
+                    .init(value: .noContent, info: "Object succesfully deleted."),
+                    .unauthorized,
                 ],
                 headers: [
-                    .init(key: "Content-Type", value: "application/json", info: "JSON", isRequired: false),
+                    
                 ],
                 body: [
-                    .init(name: "UserLoginResponse", info: "response object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                        .init(name: "user", type: .object, isRequired: true, info: "User"),
-                    ]),
-                    .init(name: "User", info: "user object", parameters: [
-                        .init(name: "id", type: .uuid, isRequired: true, info: "User identifier"),
-                        .init(name: "name", type: .string, isRequired: true, info: "User name"),
-                    ]),
+
                 ],
                 example: ###"""
-                {
-                    "id": "A9B52FF1-6E40-4C7B-BA9E-45AE30A88178",
-                    "value": "WtjGPbMXgtO1ny5Q3TWbtmFpKQN5FrJTcriaIOsPnB9VVq8P7RPsZbUj92HeW6En",
-                    "user": {
-                        "email": "root@localhost.com",
-                        "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                        "imageUrl": "https://placekitten.com/256/256",
-                        "name": "Root User"
-                    }
-                }
+                HTTP/1.1 204 No Content
+                connection: keep-alive
+                date: Tue, 15 Nov 2022 16:41:21 GMT
                 """###
             )
         )

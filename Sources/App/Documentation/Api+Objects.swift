@@ -17,13 +17,13 @@ extension Endpoint.Object {
                 .init(
                     name: "email",
                     type: .string,
-                    isRequired: true,
+                    isMandatory: true,
                     info: "Valid email address of the user account."
                 ),
                 .init(
                     name: "password",
                     type: .string,
-                    isRequired: true,
+                    isMandatory: true,
                     info: "Login password for the given user account."
                 ),
             ]
@@ -38,17 +38,17 @@ extension Endpoint.Object {
                 .init(
                     name: "id",
                     type: .uuid,
-                    isRequired: true,
+                    isMandatory: true,
                     info: "Unique identifier of the authorization token."),
                 .init(
                     name: "value",
                     type: .string,
-                    isRequired: true,
+                    isMandatory: true,
                     info: "The authorization token, this sould be used as a Bearer value."),
                 .init(
                     name: "user",
-                    type: .object,
-                    isRequired: true,
+                    type: .object("User"),
+                    isMandatory: true,
                     info: "Detailed information about the user account."),
             ]
         )
@@ -62,26 +62,145 @@ extension Endpoint.Object {
                 .init(
                     name: "id",
                     type: .uuid,
-                    isRequired: true,
+                    isMandatory: true,
                     info: "Unique user identifier."
                 ),
                 .init(
                     name: "email",
                     type: .string,
-                    isRequired: true,
+                    isMandatory: true,
                     info: "Email address of the user account."
                 ),
                 .init(
                     name: "name",
                     type: .string,
-                    isRequired: false,
+                    isMandatory: false,
                     info: "Name of the user."
                 ),
                 .init(
                     name: "imageUrl",
                     type: .string,
-                    isRequired: false,
+                    isMandatory: false,
                     info: "Profile picture URL for the given user account."
+                ),
+            ]
+        )
+    }
+    
+    // MARK: - post
+    
+    static var postDetail: Endpoint.Object {
+        .init(
+            name: "Post",
+            info: "Post detail object containing joined post information.",
+            parameters: [
+                .init(
+                    name: "id",
+                    type: .uuid,
+                    isMandatory: true,
+                    info: "Unique post identifier"
+                ),
+                .init(
+                    name: "title",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Post title"
+                ),
+                .init(
+                    name: "imageUrl",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Post image URL."
+                ),
+                .init(
+                    name: "date",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Publish date of the post."
+                ),
+                .init(
+                    name: "excerpt",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Short description of the post."
+                ),
+                .init(
+                    name: "content",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Actual contents of the post."
+                ),
+                .init(
+                    name: "tags",
+                    type: .array("TagList"),
+                    isMandatory: true,
+                    info: "Associated tags of a given post."
+                ),
+            ]
+        )
+    }
+    
+    static func postInput(isPatch: Bool = false) -> Endpoint.Object {
+        .init(
+            name: "PostInput",
+            info: "Input object for altering post types.",
+            parameters: [
+                .init(
+                    name: "title",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "Post title"
+                ),
+                .init(
+                    name: "imageUrl",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "Post image URL."
+                ),
+                .init(
+                    name: "date",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "Publish date of the post."
+                ),
+                .init(
+                    name: "excerpt",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "Short description of the post."
+                ),
+                .init(
+                    name: "content",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "Actual contents of the post."
+                ),
+                .init(
+                    name: "tagIds",
+                    type: .array("UUID"),
+                    isMandatory: !isPatch,
+                    info: "Tag identifiers as String values to associate the post with."
+                ),
+            ]
+        )
+    }
+    
+    static var tagList: Endpoint.Object {
+        .init(
+            name: "TagList",
+            info: "Short tag information.",
+            parameters: [
+                .init(
+                    name: "id",
+                    type: .uuid,
+                    isMandatory: true,
+                    info: "Unique tag identifier"
+                ),
+                .init(
+                    name: "name",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Name of the tag"
                 ),
             ]
         )

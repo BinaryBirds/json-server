@@ -136,8 +136,8 @@ struct PostController: RouteCollection {
 
     /**
      ```sh
-     curl -X POST http://localhost:8080/posts \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X POST http://localhost:8080/api/v1/posts/ \
+         -H "Authorization: Bearer PjXRkr9Qs5CnDC7Gt1MYIu69otSA3UQpeY5wZy8eq0qg8bXZav2oCfkpXVWDJ1FN" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
@@ -147,7 +147,9 @@ struct PostController: RouteCollection {
              "excerpt": "Lorem ipsum",
              "date": "2022-10-27T20:05:51Z",
              "content": "Lorem ipsum dolor sit amet",
-             "tagIds": []
+             "tagIds": [
+                "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
+             ]
          }
          '|jq
      ```
@@ -260,7 +262,7 @@ struct PostController: RouteCollection {
 
     /**
      ```sh
-     curl -i -X DELETE http://localhost:8080/posts/IDENTIFIER/ \
+     curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/ \
          -H "Authorization: Bearer TOKEN"
      ```
      */

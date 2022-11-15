@@ -153,7 +153,7 @@ private extension IndexTemplate {
         Ul {
             for header in headers {
                 Li {
-                    if header.isRequired {
+                    if header.isMandatory {
                         Span {
                             Span(header.key)
                                 .class("name")
@@ -188,21 +188,16 @@ private extension IndexTemplate {
                 Ul {
                     for param in object.parameters {
                         Li {
-                            if param.isRequired {
-                                Span {
-                                    Span(param.name)
-                                        .class("name")
-                                    Span(": " + param.type.htmlValue)
-                                        .class("type")
-                                }
-                                .class("required")
-                            }
-                            else {
-                                Span(param.name)
-                                    .class("name")
-                                Span(": " + param.type.htmlValue)
-                                    .class("type")
-                            }
+                            Span(" - ")
+                                .style("color: #999 !important;")
+                            Span(param.name)
+                                .class("name")
+                                .class(add: "required", param.isMandatory)
+                            Text(": ")
+                            Span(param.type.htmlValue)
+                                .class("type")
+                                .class(add: "required", param.isMandatory)
+
                             Span(param.info)
                                 .class("description")
                         }
@@ -238,7 +233,7 @@ private extension IndexTemplate {
         }
         .class("content-block")
         
-        H4("JSON response")
+        H4("Sample response")
         Pre {
             Code(endpoint.response.example)
         }
@@ -253,7 +248,7 @@ private extension IndexTemplate {
             Ul {
                 for param in endpoint.request.queryParams {
                     Li {
-                        if param.isRequired {
+                        if param.isMandatory {
                             Span {
                                 Span(param.name)
                                     .class("name")

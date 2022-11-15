@@ -9,12 +9,21 @@ import Foundation
 
 extension Endpoint.Header {
 
-    static var contentType: Endpoint.Header {
+    static var contentTypeBody: Endpoint.Header {
+        .init(
+            key: "Content-Type",
+            value: "application/json",
+            info: "Indicates that the request body is a JSON object.",
+            isMandatory: true
+        )
+    }
+
+    static var contentTypeResponse: Endpoint.Header {
         .init(
             key: "Content-Type",
             value: "application/json",
             info: "Indicates that the response is a JSON object.",
-            isRequired: true
+            isMandatory: true
         )
     }
     
@@ -23,7 +32,7 @@ extension Endpoint.Header {
             key: "Accept",
             value: "application/json",
             info: "Standard accept header to indicate that we only accept a JSON response.",
-            isRequired: false
+            isMandatory: false
         )
     }
     
@@ -32,7 +41,7 @@ extension Endpoint.Header {
             key: "Authorization",
             value: "Bearer [TOKEN]",
             info: "You have to provide a Bearer token using this header field to access this endpoint.",
-            isRequired: true
+            isMandatory: true
         )
     }
 }

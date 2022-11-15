@@ -110,9 +110,11 @@ textarea.original-code {
 }
 .object header h5 {
     font-size: 18px;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
-
+.object header p {
+    color: var(--secondary-text-color);
+}
 pre {
     padding: 16px 32px;
     overflow-x: scroll;
@@ -140,7 +142,7 @@ pre code .highlight.shifted {
 
 
 
-.method{
+.method {
     text-transform: uppercase;
     background: black;
     color: #fff;
@@ -183,8 +185,9 @@ pre code .highlight.shifted {
 }
 .response-codes .reason, .parameters .description {
     display: block;
-    margin-top: 4px;
-    color: #999;
+    margin-top: 8px;
+    margin-left: 10px;
+    color: var(--secondary-text-color);
 /*    font-size: 14px;*/
 }
 .parameters .required {
@@ -197,8 +200,8 @@ span.type.string { color: var(--orange-color); }
 span.type.bool { color: var(--purple-color); }
 span.type.int { color: var(--blue-color); }
 span.type.double { color: var(--blue-color); }
-span.type.array { color: var(--green-color); }
-span.type.object { color: var(--green-color); }
+span.type.array { color: var(--black-color); }
+span.type.object { color: var(--black-color); }
 
 
 pre {

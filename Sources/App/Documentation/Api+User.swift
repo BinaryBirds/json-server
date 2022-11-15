@@ -8,8 +8,6 @@
 import Foundation
 
 
-
-
 extension Endpoint {
         
     @EndpointBuilder
@@ -23,7 +21,7 @@ extension Endpoint {
                 queryParams: [
                 ],
                 headers: [
-                    .contentType,
+                    .contentTypeBody,
                     .accept,
                 ],
                 body: [
@@ -47,7 +45,7 @@ extension Endpoint {
                     .init(value: .unauthorized, info: "Indicates a failed login attempt."),
                 ],
                 headers: [
-                    .contentType,
+                    .contentTypeResponse,
                 ],
                 body: [
                     .token,
@@ -96,7 +94,7 @@ extension Endpoint {
                     .unauthorized,
                 ],
                 headers: [
-                    .contentType,
+                    .contentTypeResponse,
                 ],
                 body: [
                     .user,
