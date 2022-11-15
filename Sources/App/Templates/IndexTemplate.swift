@@ -105,15 +105,15 @@ private extension IndexTemplate {
                 
                 Div {
                     Button("Example")
-                        .onClick("openCity(event, 'example')")
+                        .onClick("changeTab(event, 'example')")
                         .class("tablinks active")
                     
                     Button("Request")
-                        .onClick("openCity(event, 'request')")
+                        .onClick("changeTab(event, 'request')")
                         .class("tablinks")
                     
                     Button("Response")
-                        .onClick("openCity(event, 'response')")
+                        .onClick("changeTab(event, 'response')")
                         .class("tablinks")
                 }
                 .class("tab")

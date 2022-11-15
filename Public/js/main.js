@@ -29,16 +29,20 @@ function toggleElement(id) {
     }
 }
 
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+function changeTab(event, tabId) {
+    const tabParent = event.currentTarget.parentNode.parentNode;
+    const tabs = tabParent.querySelectorAll(".tabcontent");
+    // hide all tabs
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = "none";
     }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    // hide deactivate all the buttons
+    const buttons = tabParent.querySelectorAll(".tablinks");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("active");
     }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
+    // display tab, activate current button
+    tabParent.querySelector("#" + tabId).style.display = "block";
+    event.currentTarget.classList.add("active");
 }
+// var activePaneId = anchorReference.getAttribute("href");
