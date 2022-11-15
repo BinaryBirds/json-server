@@ -15,20 +15,25 @@ h1 {
 }
 h1 b {
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--blue-color);
 }
 h2 {
-    color: var(--primary-color);
+    color: var(--blue-color);
     font-size: 30px;
     margin-bottom: 8px;
 }
 h3 {
-    color: var(--primary-color);
+    color: var(--blue-color);
     font-size: 24px;
     margin-bottom: 8px;
 }
+h4 {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
 a {
-    color: var(--primary-color);
+    color: var(--blue-color);
 }
 body > header {
 	text-align: center;
@@ -48,7 +53,7 @@ footer {
 	text-align: center;
 }
 .endpoint {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     margin-bottom: 12px;
 }
@@ -74,7 +79,7 @@ footer {
     margin-bottom: 16px;
 }
 .endpoint .details-wrapper {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--border-color);
 }
 .endpoint .details {
     padding: 16px;
@@ -94,14 +99,22 @@ textarea.original-code {
 }
 
 
-
-
-
+.content-block {
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
+.object header {
+    background: var(--secondary-background-color);
+    padding: 16px;
+    margin-bottom: 1px !important;
+}
+.object header h5 {
+    font-size: 18px;
+}
 
 pre {
     padding: 16px 32px;
     overflow-x: scroll;
-    margin-bottom: 16px;
 }
 pre code {
     line-height: 1.4em;
@@ -137,22 +150,19 @@ pre code .highlight.shifted {
     line-height: 24px;
 }
 .method.get {
-    background: #3374B6;
+    background: var(--blue-color);
 }
 .method.post {
-    background: #54AE32;
+    background: var(--green-color);
 }
 .method.put {
-    background: #FF9400;
+    background: var(--orange-color);
 }
 .method.patch {
-    background: #BA3A78;
+    background: var(--purple-color);
 }
 .method.delete {
-    background: #DA3B26;
-}
-.response-codes, .parameters {
-    margin: 32px 0;
+    background: var(--red-color);
 }
 .response-codes li, .parameters li {
     background: var(--secondary-background-color);
@@ -163,39 +173,29 @@ pre code .highlight.shifted {
     margin-bottom: 1px;
 }
 .httpStatus2xx {
-/*    background: #F1F8F6;*/
-/*    border: 1px solid #81AB9D;*/
+    border-left: 4px solid var(--green-color);
 }
-.httpStatus3xx {
-/*    background: #F4F7FF;*/
-/*    border: 1px solid #5169A7;*/
-}
-.httpStatus4xx {
-/*    background: #FFFAF0;*/
-/*    border: 1px solid #D5B474;*/
+.httpStatus3xx, .httpStatus4xx {
+    border-left: 4px solid var(--yellow-color);
 }
 .httpStatus5xx {
-/*    background: #FDF4F5;*/
-/*    border: 1px solid #995B5D;*/
+    border-left: 4px solid var(--red-color);
 }
 .response-codes .reason, .parameters .description {
     position: absolute;
     right: 10px;
 }
-.parameters {
-    margin-top: 16px;
-}
 .parameters .required {
     font-weight: bold;
 }
 
-span.type.uuid { color: var(--primary-color); }
-span.type.string { color: var(--primary-color); }
-span.type.int { color: var(--primary-color); }
-span.type.bool { color: var(--primary-color); }
-span.type.double { color: var(--primary-color); }
-span.type.array { color: var(--primary-color); }
-span.type.object { color: var(--primary-color); }
+span.type.uuid { color: var(--blue-color); }
+span.type.string { color: var(--blue-color); }
+span.type.int { color: var(--blue-color); }
+span.type.bool { color: var(--blue-color); }
+span.type.double { color: var(--blue-color); }
+span.type.array { color: var(--blue-color); }
+span.type.object { color: var(--blue-color); }
 
 
 pre {
@@ -213,16 +213,16 @@ pre {
     padding: 8px 16px;
     transition: 0.3s;
     margin-right: 8px;
-    background: #fff;
+    background-color: var(--secondary-background-color);
     color: #999;
 }
 .tab button:hover {
     background-color: var(--primary-background-color);
-    color: var(--primary-color);
+    color: var(--blue-color);
 }
 .tab button.active {
     background-color: var(--primary-background-color);
-    color: #000;
+    color: var(--primary-text-color);
 }
 .tabcontent {
     position: relative;
@@ -244,7 +244,7 @@ pre {
     font-weight: bold;
     border-radius: 32px;
     width: 80px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     text-transform: uppercase;
 }
 .copy-button:hover {

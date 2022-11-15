@@ -15,48 +15,15 @@ struct IndexTemplate {
                 Meta().charset("utf-8")
                 Meta().name(.viewport).content("width=device-width, initial-scale=1")
                 
-                //                Title(title.stripHtml())
-                
-                //                Style {
-                //                    Text(
-                //                        ###"""
-                //                        :root {
-                //                            --primary-color: \###(colors.primary.light);
-                //                            --secondary-color: \###(colors.secondary.light);
-                //                        }
-                //                        @media (prefers-color-scheme: dark) {
-                //                            :root {
-                //                                --primary-color: \###(colors.primary.dark);
-                //                                --secondary-color: \###(colors.secondary.dark);
-                //                            }
-                //                        }
-                //                        """###
-                //                        )
-                //                }
+                Title("JSON server")
                 
                 Link(rel: .stylesheet).href("./css/colors.css")
                 Link(rel: .stylesheet).href("./css/style.css")
                 Link(rel: .stylesheet).href("./css/code.css")
                 
-                
-                Style {
-                    Text(###"""
-      :root {
-        --primary-color: #2097F3;
-        --secondary-color: #2097F3;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --primary-color: #2097F3;
-          --secondary-color: #2097F3;
-        }
-      }
-"""###)
-                }
-                //                Link(rel: .icon).href("./img/\(key).ico")
-                //                Link(rel: .shortcutIcon).href("./img/\(key)/favicon.ico")
-                //                Link(rel: .appleTouchIcon).href("./img/\(key)/apple-touch-icon.png")
+//                Link(rel: .icon).href("./img/\(key).ico")
+//                Link(rel: .shortcutIcon).href("./img/\(key)/favicon.ico")
+//                Link(rel: .appleTouchIcon).href("./img/\(key)/apple-touch-icon.png")
                 
             }
             Body {
@@ -202,40 +169,44 @@ private extension IndexTemplate {
                 
             }
         }
-        .class("parameters")
+        .class("parameters", "content-block")
     }
     
     @TagBuilder
     static func render(objects: [Endpoint.Object]) -> SwiftHtml.Tag {
         for object in objects {
-            H6(object.name)
-            P(object.info)
-            
-            Ul {
-                for param in object.parameters {
-                    Li {
-                        if param.isRequired {
-                            Span {
+            Div {
+                Header {
+                    H5(object.name)
+                    P(object.info)
+                }
+                Ul {
+                    for param in object.parameters {
+                        Li {
+                            if param.isRequired {
+                                Span {
+                                    Span(param.name)
+                                        .class("name")
+                                    Span(": " + param.type.htmlValue)
+                                        .class("type")
+                                }
+                                .class("required")
+                            }
+                            else {
                                 Span(param.name)
                                     .class("name")
                                 Span(": " + param.type.htmlValue)
                                     .class("type")
                             }
-                            .class("required")
+                            Span(param.info)
+                                .class("description")
                         }
-                        else {
-                            Span(param.name)
-                                .class("name")
-                            Span(": " + param.type.htmlValue)
-                                .class("type")
-                        }
-                        Span(param.info)
-                            .class("description")
+                        
                     }
-                    
                 }
+                .class("parameters")
             }
-            .class("parameters")
+            .class("object", "content-block")
         }
     }
     
@@ -256,17 +227,17 @@ private extension IndexTemplate {
         .id("tooltip-\(endpointId)")
         .class("tooltip")
         
-        H4("Request")
+        H4("cURL request")
         Pre {
-            
-            
             Code(endpoint.request.curl)
         }
+        .class("content-block")
         
-        H4("Response")
+        H4("JSON response")
         Pre {
             Code(endpoint.response.example)
         }
+        .class("content-block")
     }
     
     @TagBuilder
@@ -296,7 +267,7 @@ private extension IndexTemplate {
                 
             }
         }
-        .class("parameters")
+        .class("parameters", "content-block")
         
         H4("Headers")
         render(headers: endpoint.request.headers)
@@ -323,7 +294,7 @@ private extension IndexTemplate {
                 .class("httpStatus\(String(status.value.code / 100))xx")
             }
         }
-        .class("response-codes")
+        .class("response-codes", "content-block")
         
         H4("Headers")
         render(headers: endpoint.response.headers)
