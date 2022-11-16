@@ -11,14 +11,14 @@ final class FileTests: AppTestCase {
  
         try app
             .describe(#function)
-            .post("files?key=hello.txt")
+            .post("api/v1/files?key=hello.txt")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body("hello world")
             .expect(.ok)
             .expect(.plainText)
             .expect(String.self) { value in
-                XCTAssertEqual(value, "http://localhost:8080/hello.txt")
+                XCTAssertEqual(value, "http://localhost:8080/uploads/hello.txt")
             }
             .test()
     }

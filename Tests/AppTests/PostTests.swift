@@ -12,7 +12,7 @@ final class PostTests: AppTestCase {
  
         try app
             .describe(#function)
-            .get("posts")
+            .get("api/v1/posts")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)
@@ -33,7 +33,7 @@ final class PostTests: AppTestCase {
         
         try app
             .describe(#function)
-            .post("posts")
+            .post("api/v1/posts")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Post.Create(
@@ -53,7 +53,7 @@ final class PostTests: AppTestCase {
         
         try app
             .describe(#function)
-            .get("posts")
+            .get("api/v1/posts")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)
@@ -77,7 +77,7 @@ final class PostTests: AppTestCase {
         
         try app
             .describe(#function)
-            .put("posts/\(postId.uuidString)")
+            .put("api/v1/posts/\(postId.uuidString)")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Post.Create(
@@ -108,7 +108,7 @@ final class PostTests: AppTestCase {
         
         try app
             .describe(#function)
-            .patch("posts/\(postId.uuidString)")
+            .patch("api/v1/posts/\(postId.uuidString)")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Post.Patch(title: "Patched"))
@@ -135,7 +135,7 @@ final class PostTests: AppTestCase {
 
         try app
             .describe(#function)
-            .delete("posts/\(postId.uuidString)")
+            .delete("api/v1/posts/\(postId.uuidString)")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .expect(.noContent)

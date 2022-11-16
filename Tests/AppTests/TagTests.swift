@@ -11,7 +11,7 @@ final class TagTests: AppTestCase {
  
         try app
             .describe(#function)
-            .get("tags")
+            .get("api/v1/tags")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)
@@ -28,7 +28,7 @@ final class TagTests: AppTestCase {
  
         try app
             .describe(#function)
-            .post("tags")
+            .post("api/v1/tags")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Tag.Create(name: "Yellow"))
@@ -39,7 +39,7 @@ final class TagTests: AppTestCase {
         
         try app
             .describe(#function)
-            .get("tags")
+            .get("api/v1/tags")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)
@@ -59,7 +59,7 @@ final class TagTests: AppTestCase {
         }
         try app
             .describe(#function)
-            .put("tags/\(tagId.uuidString)")
+            .put("api/v1/tags/\(tagId.uuidString)")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Tag.Update(name: "Updated"))
@@ -81,7 +81,7 @@ final class TagTests: AppTestCase {
         }
         try app
             .describe(#function)
-            .patch("tags/\(tagId.uuidString)")
+            .patch("api/v1/tags/\(tagId.uuidString)")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Tag.Patch(name: "Patched"))
@@ -103,14 +103,14 @@ final class TagTests: AppTestCase {
         }
         try app
             .describe(#function)
-            .delete("tags/\(tagId.uuidString)")
+            .delete("api/v1/tags/\(tagId.uuidString)")
             .bearerToken(try getUserToken(app).value)
             .expect(.noContent)
             .test()
         
         try app
             .describe(#function)
-            .get("tags")
+            .get("api/v1/tags")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)

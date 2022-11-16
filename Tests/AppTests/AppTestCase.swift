@@ -14,7 +14,7 @@ open class AppTestCase: XCTestCase {
  
         try app
             .describe("Login request should return a valid token.")
-            .post("user/login")
+            .post("api/v1/user/login")
             .header("accept", "application/json")
             .body(User.Login(email: "root@localhost.com", password: "ChangeMe1"))
             .expect(.ok)

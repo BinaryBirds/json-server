@@ -11,7 +11,7 @@ final class UserTests: AppTestCase {
  
         try app
             .describe("Login request should return a valid token.")
-            .post("user/login")
+            .post("api/v1/user/login")
             .header("accept", "application/json")
             .body(User.Login(email: "root@localhost.com", password: "ChangeMe1"))
             .expect(.ok)
@@ -27,7 +27,7 @@ final class UserTests: AppTestCase {
  
         try app
             .describe("Invalid login request should return with an unauthorized status code.")
-            .post("user/login")
+            .post("api/v1/user/login")
             .header("accept", "application/json")
             .body(User.Login(email: "root@localhost.com", password: "InvalidPassword"))
             .expect(.unauthorized)
@@ -43,7 +43,7 @@ final class UserTests: AppTestCase {
         
         try app
             .describe("Authorized profile request should return with the user data.")
-            .get("user/me")
+            .get("api/v1/user/me")
             .header("accept", "application/json")
             .bearerToken(token.value)
             .expect(.ok)
@@ -59,7 +59,7 @@ final class UserTests: AppTestCase {
 
         try app
             .describe(#function)
-            .get("user/me")
+            .get("api/v1/user/me")
             .header("accept", "application/json")
             .bearerToken("invalid-token")
             .expect(.unauthorized)
@@ -75,7 +75,7 @@ final class UserTests: AppTestCase {
         
         try app
             .describe("Authorized profile request should return with the user data.")
-            .put("user/me")
+            .put("api/v1/user/me")
             .bearerToken(token.value)
             .header("accept", "application/json")
             .body(User.Update(
@@ -103,7 +103,7 @@ final class UserTests: AppTestCase {
         
         try app
             .describe("Authorized profile request should return with the user data.")
-            .patch("user/me")
+            .patch("api/v1/user/me")
             .bearerToken(token.value)
             .header("accept", "application/json")
             .body(User.Patch(name: "Jane"))

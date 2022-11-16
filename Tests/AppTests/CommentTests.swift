@@ -16,7 +16,7 @@ final class CommentTests: AppTestCase {
 
         try app
             .describe(#function)
-            .get("posts/\(postId.uuidString)/comments/")
+            .get("api/v1/posts/\(postId.uuidString)/comments/")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)
@@ -37,7 +37,7 @@ final class CommentTests: AppTestCase {
         
         try app
             .describe(#function)
-            .post("posts/\(postId.uuidString)/comments")
+            .post("api/v1/posts/\(postId.uuidString)/comments")
             .bearerToken(try getUserToken(app).value)
             .header("accept", "application/json")
             .body(Comment.Create(content: "Lorem amet sit dolor"))
@@ -48,7 +48,7 @@ final class CommentTests: AppTestCase {
         
         try app
             .describe(#function)
-            .get("posts/\(postId.uuidString)/comments")
+            .get("api/v1/posts/\(postId.uuidString)/comments")
             .header("accept", "application/json")
             .expect(.ok)
             .expect(.json)
@@ -71,7 +71,7 @@ final class CommentTests: AppTestCase {
 
         try app
             .describe(#function)
-            .delete("posts/\(comment.postId.uuidString)/comments/\(commentId.uuidString)")
+            .delete("api/v1/posts/\(comment.postId.uuidString)/comments/\(commentId.uuidString)")
             .bearerToken(token.value)
             .header("accept", "application/json")
             .expect(.ok)
@@ -95,7 +95,7 @@ final class CommentTests: AppTestCase {
 
         try app
             .describe(#function)
-            .delete("posts/\(comment.postId.uuidString)/comments/\(commentId.uuidString)")
+            .delete("api/v1/posts/\(comment.postId.uuidString)/comments/\(commentId.uuidString)")
             .bearerToken(token.value)
             .header("accept", "application/json")
             .expect(.forbidden)
