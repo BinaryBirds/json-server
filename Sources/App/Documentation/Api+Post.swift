@@ -266,7 +266,8 @@ extension Endpoint {
                           "date": "2022-10-27T20:05:51Z",
                           "content": "Lorem ipsum dolor sit amet",
                           "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
+                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                             "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46"
                           ]
                       }
                       '
@@ -288,11 +289,11 @@ extension Endpoint {
                 example: ###"""
                 {
                     "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
+                    "title": "Lorem ipsum",
                     "imageUrl": "https://placekitten.com/640/360",
                     "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
+                    "excerpt": "Lorem ipsum",
+                    "content": "Lorem ipsum dolor sit amet",
                     "tags": [
                         {
                             "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
@@ -343,7 +344,6 @@ extension Endpoint {
                           ]
                       }
                       '
-                    '
                 """###
             ),
             response: .init(
@@ -361,16 +361,12 @@ extension Endpoint {
                 example: ###"""
                 {
                     "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
+                    "title": "Lorem ipsum",
                     "imageUrl": "https://placekitten.com/640/360",
                     "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
+                    "excerpt": "Lorem ipsum",
+                    "content": "Lorem ipsum dolor sit amet",
                     "tags": [
-                        {
-                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                            "name": "Orange"
-                        },
                         {
                             "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
                             "name": "Red"
@@ -400,23 +396,22 @@ extension Endpoint {
                     .postInput(isPatch: true),
                 ],
                 example: ###"""
-                  curl -X POST http://localhost:8080/api/v1/posts/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                      {
-                          "imageUrl": "https://placekitten.com/640/360",
-                          "title": "Lorem ipsum",
-                          "excerpt": "Lorem ipsum",
-                          "date": "2022-10-27T20:05:51Z",
-                          "content": "Lorem ipsum dolor sit amet",
-                          "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
-                          ]
-                      }
-                      '
-                    '
+                   curl -X PATCH http://localhost:8080/posts/[id]/ \
+                       -H "Authorization: Bearer [TOKEN]" \
+                       -H "Content-Type: application/json" \
+                       -H "Accept: application/json" \
+                       --data-raw '
+                       {
+                           "imageUrl": "https://placekitten.com/640/360",
+                           "title": "Lorem ipsum",
+                           "excerpt": "Lorem ipsum",
+                           "date": "2022-10-27T20:05:51Z",
+                           "content": "Lorem ipsum dolor sit amet",
+                           "tagIds": [
+                            "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46"
+                        ]
+                       }
+                       '
                 """###
             ),
             response: .init(
@@ -434,16 +429,12 @@ extension Endpoint {
                 example: ###"""
                 {
                     "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
+                    "title": "Lorem ipsum",
                     "imageUrl": "https://placekitten.com/640/360",
                     "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
+                    "excerpt": "Lorem ipsum",
+                    "content": "Lorem ipsum dolor sit amet",
                     "tags": [
-                        {
-                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                            "name": "Orange"
-                        },
                         {
                             "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
                             "name": "Red"
