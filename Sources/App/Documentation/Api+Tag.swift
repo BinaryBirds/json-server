@@ -33,7 +33,6 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
-                    .unauthorized,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -47,7 +46,7 @@ extension Endpoint {
                                 name: "id",
                                 type: .uuid,
                                 isMandatory: true,
-                                info: "Unique identifier of the post object."
+                                info: "Unique identifier of the tag object."
                             ),
                             .init(
                                 name: "name",
@@ -97,33 +96,17 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
-                    .unauthorized,
                 ],
                 headers: [
                     .contentTypeResponse,
                 ],
                 body: [
-                    .postDetail,
-                    .tagList,
+                    .tagDetail,
                 ],
                 example: ###"""
                 {
-                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
-                    "imageUrl": "https://placekitten.com/640/360",
-                    "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
-                    "tags": [
-                        {
-                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                            "name": "Orange"
-                        },
-                        {
-                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                            "name": "Red"
-                        }
-                    ]
+                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                  "name": "Red"
                 }
                 """###
             )
@@ -176,26 +159,12 @@ extension Endpoint {
                     .contentTypeResponse,
                 ],
                 body: [
-                    .tagList,
+                    .tagDetail,
                 ],
                 example: ###"""
                 {
-                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
-                    "imageUrl": "https://placekitten.com/640/360",
-                    "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
-                    "tags": [
-                        {
-                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                            "name": "Orange"
-                        },
-                        {
-                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                            "name": "Red"
-                        }
-                    ]
+                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                  "name": "Red"
                 }
                 """###
             )
@@ -248,26 +217,12 @@ extension Endpoint {
                     .contentTypeResponse,
                 ],
                 body: [
-                    .tagList,
+                    .tagDetail,
                 ],
                 example: ###"""
                 {
-                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
-                    "imageUrl": "https://placekitten.com/640/360",
-                    "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
-                    "tags": [
-                        {
-                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                            "name": "Orange"
-                        },
-                        {
-                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                            "name": "Red"
-                        }
-                    ]
+                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                  "name": "Red"
                 }
                 """###
             )
@@ -320,26 +275,12 @@ extension Endpoint {
                     .contentTypeResponse,
                 ],
                 body: [
-                    .tagList,
+                    .tagDetail,
                 ],
                 example: ###"""
                 {
-                    "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                    "title": "Post #1",
-                    "imageUrl": "https://placekitten.com/640/360",
-                    "date": "2022-10-31T11:25:30Z",
-                    "excerpt": "Excerpt #1",
-                    "content": "Content #1",
-                    "tags": [
-                        {
-                            "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                            "name": "Orange"
-                        },
-                        {
-                            "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                            "name": "Red"
-                        }
-                    ]
+                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                  "name": "Red"
                 }
                 """###
             )

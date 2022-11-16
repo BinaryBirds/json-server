@@ -12,6 +12,8 @@ struct TagController: RouteCollection {
             .grouped(ApiUser.guardMiddleware())
 
         baseRoutes.get(use: list)
+        baseRoutes.grouped(":tagId").get(use: detail)
+        
         safeRoutes.post(use: create)
         safeRoutes.group(":tagId") { routes in
             routes.put(use: update)
@@ -46,6 +48,19 @@ struct TagController: RouteCollection {
         try await TagModel.query(on: req.db).all().map {
             .init(id: try $0.requireID(), name: $0.name)
         }
+    }
+    
+    /**
+     ```sh
+     curl -X GET http://localhost:8080/tags/[id]/ \
+         -H "Accept: application/json" \
+         |jq
+     ```
+     */
+    func detail(req: Request) async throws -> Tag.Detail {
+        let model = try await find(req)
+        let id = try model.requireID()
+        return .init(id: id, name: model.name)
     }
 
     /**

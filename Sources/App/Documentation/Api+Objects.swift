@@ -185,9 +185,11 @@ extension Endpoint.Object {
         )
     }
     
-    static var tagList: Endpoint.Object {
+    // MARK: -
+    
+    static var tagListItem: Endpoint.Object {
         .init(
-            name: "TagList",
+            name: "TagListItem",
             info: "Short tag information.",
             parameters: [
                 .init(
@@ -201,6 +203,27 @@ extension Endpoint.Object {
                     type: .string,
                     isMandatory: true,
                     info: "Name of the tag"
+                ),
+            ]
+        )
+    }
+    
+    static var tagDetail: Endpoint.Object {
+        .init(
+            name: "TagDetail",
+            info: "Detailed tag information.",
+            parameters: [
+                .init(
+                    name: "id",
+                    type: .uuid,
+                    isMandatory: true,
+                    info: "Unique identifier of the tag object."
+                ),
+                .init(
+                    name: "name",
+                    type: .string,
+                    isMandatory: true,
+                    info: "Name of the tag object."
                 ),
             ]
         )

@@ -210,7 +210,7 @@ extension Endpoint {
                 ],
                 body: [
                     .postDetail,
-                    .tagList,
+                    .tagListItem,
                 ],
                 example: ###"""
                 {
@@ -284,7 +284,7 @@ extension Endpoint {
                 ],
                 body: [
                     .postDetail,
-                    .tagList,
+                    .tagListItem,
                 ],
                 example: ###"""
                 {
@@ -356,7 +356,7 @@ extension Endpoint {
                 ],
                 body: [
                     .postDetail,
-                    .tagList,
+                    .tagListItem,
                 ],
                 example: ###"""
                 {
@@ -424,7 +424,7 @@ extension Endpoint {
                 ],
                 body: [
                     .postDetail,
-                    .tagList,
+                    .tagListItem,
                 ],
                 example: ###"""
                 {
