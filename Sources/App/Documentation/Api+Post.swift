@@ -271,7 +271,6 @@ extension Endpoint {
                           ]
                       }
                       '
-                    '
                 """###
             ),
             response: .init(

@@ -228,4 +228,19 @@ extension Endpoint.Object {
             ]
         )
     }
+    
+    static func tagInput(isPatch: Bool = false) -> Endpoint.Object {
+        .init(
+            name: "TagInput",
+            info: "Input object for altering tag types.",
+            parameters: [
+                .init(
+                    name: "name",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "Name of the tag"
+                ),
+            ]
+        )
+    }
 }

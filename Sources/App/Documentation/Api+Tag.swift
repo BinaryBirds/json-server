@@ -128,7 +128,7 @@ extension Endpoint {
                     .accept,
                 ],
                 body: [
-                    .postInput(),
+                    .tagInput(),
                 ],
                 example: ###"""
                   curl -X POST http://localhost:8080/api/v1/tags/ \
@@ -137,17 +137,9 @@ extension Endpoint {
                       -H "Accept: application/json" \
                       --data-raw '
                       {
-                          "imageUrl": "https://placekitten.com/640/360",
-                          "title": "Lorem ipsum",
-                          "excerpt": "Lorem ipsum",
-                          "date": "2022-10-27T20:05:51Z",
-                          "content": "Lorem ipsum dolor sit amet",
-                          "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
-                          ]
+                          "name": "Red"
                       }
                       '
-                    '
                 """###
             ),
             response: .init(
@@ -186,7 +178,7 @@ extension Endpoint {
                     .accept,
                 ],
                 body: [
-                    .postInput(),
+                    .tagInput(),
                 ],
                 example: ###"""
                   curl -X PUT http://localhost:8080/api/v1/tags/[id]/ \
@@ -194,17 +186,9 @@ extension Endpoint {
                       -H "Content-Type: application/json" \
                       -H "Accept: application/json" \
                       --data-raw '
-                      {
-                          "imageUrl": "https://placekitten.com/640/360",
-                          "title": "Lorem ipsum",
-                          "excerpt": "Lorem ipsum",
-                          "date": "2022-10-27T20:05:51Z",
-                          "content": "Lorem ipsum dolor sit amet",
-                          "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
-                          ]
-                      }
-                      '
+                    {
+                        "name": "Red"
+                    }
                     '
                 """###
             ),
@@ -244,25 +228,17 @@ extension Endpoint {
                     .accept,
                 ],
                 body: [
-                    .postInput(isPatch: true),
+                    .tagInput(isPatch: true),
                 ],
                 example: ###"""
-                  curl -X POST http://localhost:8080/api/v1/tags/ \
+                  curl -X PATCH http://localhost:8080/api/v1/tags/ \
                       -H "Authorization: Bearer [TOKEN]" \
                       -H "Content-Type: application/json" \
                       -H "Accept: application/json" \
                       --data-raw '
-                      {
-                          "imageUrl": "https://placekitten.com/640/360",
-                          "title": "Lorem ipsum",
-                          "excerpt": "Lorem ipsum",
-                          "date": "2022-10-27T20:05:51Z",
-                          "content": "Lorem ipsum dolor sit amet",
-                          "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
-                          ]
-                      }
-                      '
+                        {
+                            "name": "Red"
+                        }
                     '
                 """###
             ),
