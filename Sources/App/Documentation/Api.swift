@@ -22,9 +22,19 @@ extension Endpoint {
                 endpoints: postEndpoints
             ),
             Group(
+                name: "Comment",
+                info: "Comment management - list, create, update, delete, etc.",
+                endpoints: commentEndpoints
+            ),
+            Group(
                 name: "Tag",
                 info: "Tag management - list, create, update, delete, etc.",
                 endpoints: tagEndpoints
+            ),
+            Group(
+                name: "File",
+                info: "Basic file and asset management functions.",
+                endpoints: fileEndpoints
             ),
         ]
     }
