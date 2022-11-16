@@ -109,6 +109,114 @@ extension Endpoint {
                 """###
             )
         )
+        
+        // MARK: -
+        
+        Endpoint(
+            name: "Update user",
+            method: .put,
+            path: "/user/me/",
+            info: "Update user profile details",
+            request: .init(
+                queryParams: [
+                ],
+                headers: [
+                    .authorization,
+                    .accept,
+                ],
+                body: [
+                    .userInput(),
+                ],
+                example: ###"""
+                 curl -X PUT http://localhost:8080/api/v1/user/me/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "imageUrl": "https://placekitten.com/256/256",
+                         "name": "John Doe",
+                         "email": "root@localhost.com",
+                         "password": "ChangeMe1"
+                     }
+                     '
+                """###
+            ),
+            response: .init(
+                statusCodes: [
+                    .ok,
+                    .unauthorized,
+                ],
+                headers: [
+                    .contentTypeResponse,
+                ],
+                body: [
+                    .user,
+                ],
+                example: ###"""
+                {
+                    "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
+                    "email": "root@localhost.com",
+                    "name": "Root User",
+                    "imageUrl": "https://placekitten.com/256/256"
+                }
+                """###
+            )
+        )
+        
+        // MARK: -
+        
+        Endpoint(
+            name: "Patch user",
+            method: .patch,
+            path: "/user/me/",
+            info: "Patch user profile details",
+            request: .init(
+                queryParams: [
+                ],
+                headers: [
+                    .authorization,
+                    .accept,
+                ],
+                body: [
+                    .userInput(isPatch: true),
+                ],
+                example: ###"""
+                 curl -X PATCH http://localhost:8080/api/v1/user/me/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "imageUrl": "https://placekitten.com/256/256",
+                         "name": "John Doe",
+                         "email": "root@localhost.com",
+                         "password": "ChangeMe1"
+                     }
+                     '
+                """###
+            ),
+            response: .init(
+                statusCodes: [
+                    .ok,
+                    .unauthorized,
+                ],
+                headers: [
+                    .contentTypeResponse,
+                ],
+                body: [
+                    .user,
+                ],
+                example: ###"""
+                {
+                    "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
+                    "email": "root@localhost.com",
+                    "name": "Root User",
+                    "imageUrl": "https://placekitten.com/256/256"
+                }
+                """###
+            )
+        )
 
     }
 }

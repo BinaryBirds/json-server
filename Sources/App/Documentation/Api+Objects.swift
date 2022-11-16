@@ -87,6 +87,41 @@ extension Endpoint.Object {
         )
     }
     
+    static func userInput(isPatch: Bool = false) -> Endpoint.Object {
+        .init(
+            name: "UserInput",
+            info: "Input object for altering user types.",
+            parameters: [
+                
+                .init(
+                    name: "email",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "New email address for the user."
+                ),
+                .init(
+                    name: "name",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "New name for the user."
+                ),
+                .init(
+                    name: "password",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "New password for the user."
+                ),
+                .init(
+                    name: "imageUrl",
+                    type: .string,
+                    isMandatory: !isPatch,
+                    info: "New profile picture URL for the user."
+                ),
+            ]
+        )
+    }
+    
+    
     // MARK: - post
     
     static var postDetail: Endpoint.Object {
