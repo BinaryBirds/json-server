@@ -41,7 +41,7 @@ struct IndexTemplate {
                         Div {
                             H2("Base URL")
 //                            P("http://localhost:8080/api/v1/")
-                            P("https://json-server.binarybirds.com/api/v1/")
+                            P("https://jsonserver.binarybirds.com/api/v1/")
                         }
                         .class("global-info")
 

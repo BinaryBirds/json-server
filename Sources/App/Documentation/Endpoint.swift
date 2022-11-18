@@ -203,7 +203,7 @@ extension Endpoint {
                 .replacingOccurrences(of: "\\", with: "<span class=\"keyword\">\\</span>")
                 .replacingOccurrences(of: " \"", with: " <span class=\"string\">\"")
                 .replacingOccurrences(of: "\" ", with: "\"</span> ")
-                .replacingOccurrences(of: "http://localhost:8080/", with: "https://json-server.binarybirds.com/")
+                .replacingOccurrences(of: "http://localhost:8080/", with: "https://jsonserver.binarybirds.com/")
             
             if curl.hasSuffix("'") {
                 curl += "</span>"
