@@ -31,7 +31,7 @@ extension Endpoint {
                 body: [
                 ],
                 example: ###"""
-                 curl -X POST "http://localhost:8080/api/v1/files/?key=test.jpg" \
+                curl -X POST "http://localhost:8080/api/v1/files/?key=test.jpg" \
                      -H "Authorization: Bearer [TOKEN]" \
                      --data-binary @"/Users/[me]/test_image.jpg"
                 """###

@@ -128,7 +128,7 @@ extension Endpoint {
                     .userInput(),
                 ],
                 example: ###"""
-                 curl -X PUT http://localhost:8080/api/v1/user/me/ \
+                curl -X PUT http://localhost:8080/api/v1/user/me/ \
                      -H "Authorization: Bearer [TOKEN]" \
                      -H "Content-Type: application/json" \
                      -H "Accept: application/json" \
@@ -182,7 +182,7 @@ extension Endpoint {
                     .userInput(isPatch: true),
                 ],
                 example: ###"""
-                 curl -X PATCH http://localhost:8080/api/v1/user/me/ \
+                curl -X PATCH http://localhost:8080/api/v1/user/me/ \
                      -H "Authorization: Bearer [TOKEN]" \
                      -H "Content-Type: application/json" \
                      -H "Accept: application/json" \

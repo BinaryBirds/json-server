@@ -116,8 +116,9 @@ textarea.original-code {
     color: var(--secondary-text-color);
 }
 pre {
-    padding: 16px 32px;
+    padding: 16px;
     overflow-x: scroll;
+    background: var(--secondary-background-color);
 }
 pre code {
     line-height: 1.4em;
@@ -204,12 +205,6 @@ span.type.array { color: var(--black-color); }
 span.type.object { color: var(--black-color); }
 
 
-pre {
-    background: var(--secondary-background-color);
-}
-.tab {
-    
-}
 .tab button {
     font-size: 16px;
     display: inline-block;

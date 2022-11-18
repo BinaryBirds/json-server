@@ -186,8 +186,9 @@ extension Endpoint {
         pre code .preprocessing { color: #643820;
          */
             
+        /// @NOTE: total hack, need a better tokenizer... :)
         var curl: String {
-            return example
+            var curl = example
                 .replacingOccurrences(of: "curl", with: "<span class=\"call\">curl</span>")
                 .replacingOccurrences(of: "-X POST", with: "-X <span class=\"keyword\">POST</span>")
                 .replacingOccurrences(of: "-X GET", with: "-X <span class=\"keyword\">GET</span>")
@@ -195,11 +196,18 @@ extension Endpoint {
                 .replacingOccurrences(of: "-X PATCH", with: "-X <span class=\"keyword\">PATCH</span>")
                 .replacingOccurrences(of: "-X DELETE", with: "-X <span class=\"keyword\">DELETE</span>")
                 .replacingOccurrences(of: "-X", with: "<span class=\"property\">-X</span>")
+                .replacingOccurrences(of: "-i", with: "<span class=\"property\">-i</span>")
                 .replacingOccurrences(of: "-H", with: "<span class=\"property\">-H</span>")
-                .replacingOccurrences(of: "--data-raw", with: "<span class=\"property\">--data-raw</span>")
+                .replacingOccurrences(of: "--data-raw '", with: "<span class=\"property\">--data-raw</span> <span class=\"string\">'")
+//                .replacingOccurrences(of: "'", with: "'</span>")
                 .replacingOccurrences(of: "\\", with: "<span class=\"keyword\">\\</span>")
                 .replacingOccurrences(of: " \"", with: " <span class=\"string\">\"")
                 .replacingOccurrences(of: "\" ", with: "\"</span> ")
+            
+            if curl.hasSuffix("'") {
+                curl += "</span>"
+            }
+            return curl
         }
     }
 }

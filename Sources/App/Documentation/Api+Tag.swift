@@ -27,7 +27,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -X GET http://localhost:8080/api/v1/tags/ \
-                    -H "Accept: application/json"
+                     -H "Accept: application/json"
                 """###
             ),
             response: .init(
@@ -59,14 +59,14 @@ extension Endpoint {
                 ],
                 example: ###"""
                 [
-                  {
-                    "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                    "name": "Red"
-                  },
-                  {
-                    "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                    "name": "Orange"
-                  }
+                    {
+                        "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                        "name": "Red"
+                    },
+                    {
+                        "id": "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                        "name": "Orange"
+                    }
                 ]
                 """###
             )
@@ -90,7 +90,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -X GET http://localhost:8080/api/v1/tags/[id]/ \
-                    -H "Accept: application/json"
+                     -H "Accept: application/json"
                 """###
             ),
             response: .init(
@@ -105,8 +105,8 @@ extension Endpoint {
                 ],
                 example: ###"""
                 {
-                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                  "name": "Red"
+                    "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                    "name": "Red"
                 }
                 """###
             )
@@ -131,15 +131,15 @@ extension Endpoint {
                     .tagInput(),
                 ],
                 example: ###"""
-                  curl -X POST http://localhost:8080/api/v1/tags/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                      {
-                          "name": "Red"
-                      }
-                      '
+                curl -X POST http://localhost:8080/api/v1/tags/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "name": "Red"
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -155,8 +155,8 @@ extension Endpoint {
                 ],
                 example: ###"""
                 {
-                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                  "name": "Red"
+                    "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                    "name": "Red"
                 }
                 """###
             )
@@ -181,15 +181,15 @@ extension Endpoint {
                     .tagInput(),
                 ],
                 example: ###"""
-                  curl -X PUT http://localhost:8080/api/v1/tags/[id]/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                    {
-                        "name": "Red"
-                    }
-                    '
+                curl -X PUT http://localhost:8080/api/v1/tags/[id]/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "name": "Red"
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -205,8 +205,8 @@ extension Endpoint {
                 ],
                 example: ###"""
                 {
-                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                  "name": "Red"
+                    "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                    "name": "Red"
                 }
                 """###
             )
@@ -231,15 +231,15 @@ extension Endpoint {
                     .tagInput(isPatch: true),
                 ],
                 example: ###"""
-                  curl -X PATCH http://localhost:8080/api/v1/tags/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                        {
-                            "name": "Red"
-                        }
-                    '
+                curl -X PATCH http://localhost:8080/api/v1/tags/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "name": "Red"
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -255,8 +255,8 @@ extension Endpoint {
                 ],
                 example: ###"""
                 {
-                  "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
-                  "name": "Red"
+                    "id": "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46",
+                    "name": "Red"
                 }
                 """###
             )
@@ -279,7 +279,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -i -X DELETE http://localhost:8080/api/v1/tags/[id]/ \
-                    -H "Authorization: Bearer [TOKEN]"
+                     -H "Authorization: Bearer [TOKEN]"
                 """###
             ),
             response: .init(

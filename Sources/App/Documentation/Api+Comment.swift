@@ -27,8 +27,8 @@ extension Endpoint {
                 body: [
                 ],
                 example: ###"""
-                     curl -X GET http://localhost:8080/api/v1/posts/[id]/comments/ \
-                         -H "Accept: application/json" \
+                curl -X GET http://localhost:8080/api/v1/posts/[id]/comments/ \
+                     -H "Accept: application/json"
                 """###
             ),
             response: .init(
@@ -73,28 +73,28 @@ extension Endpoint {
                 ],
                 example: ###"""
                 [
-                  {
-                    "user": {
-                      "email": "root@localhost.com",
-                      "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                      "imageUrl": "https://placekitten.com/256/256",
-                      "name": "Root User"
+                    {
+                        "user": {
+                            "email": "root@localhost.com",
+                            "id": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
+                            "imageUrl": "https://placekitten.com/256/256",
+                            "name": "Root User"
+                        },
+                        "id": "936E1F6F-8675-43D7-BEDB-0A168DA4C551",
+                        "content": "Cras leo nibh, suscipit eu consectetur quis",
+                        "date": "2022-10-31T11:25:31Z"
                     },
-                    "id": "936E1F6F-8675-43D7-BEDB-0A168DA4C551",
-                    "content": "Cras leo nibh, suscipit eu consectetur quis",
-                    "date": "2022-10-31T11:25:31Z"
-                  },
-                  {
-                    "user": {
-                      "email": "john@localhost.com",
-                      "id": "19B5CC08-D698-4592-96B8-437681EDCE67",
-                      "imageUrl": "https://placekitten.com/256/256",
-                      "name": "John Doe"
-                    },
-                    "id": "54BDD31D-3660-4865-B7E2-5D7A1973C6CF",
-                    "content": "Proin facilisis massa risus",
-                    "date": "2022-10-31T11:25:31Z"
-                  }
+                    {
+                        "user": {
+                            "email": "john@localhost.com",
+                            "id": "19B5CC08-D698-4592-96B8-437681EDCE67",
+                            "imageUrl": "https://placekitten.com/256/256",
+                            "name": "John Doe"
+                        },
+                        "id": "54BDD31D-3660-4865-B7E2-5D7A1973C6CF",
+                        "content": "Proin facilisis massa risus",
+                        "date": "2022-10-31T11:25:31Z"
+                    }
                 ]
                 """###
             )
@@ -131,15 +131,15 @@ extension Endpoint {
                     ),
                 ],
                 example: ###"""
-                  curl -X POST http://localhost:8080/api/v1/posts/[id]/comments/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                      {
-                          "content": "Lorem ipsum dolor sit amet"
-                      }
-                      '
+                curl -X POST http://localhost:8080/api/v1/posts/[id]/comments/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                        "content": "Lorem ipsum dolor sit amet"
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -189,11 +189,11 @@ extension Endpoint {
                 ],
                 example: ###"""
                 {
-                  "id": "D1C5CA29-AC1A-438A-A1CF-6256EC10F010",
-                  "content": "Lorem ipsum dolor sit amet",
-                  "postId": "91007F7C-DFC5-46EE-BA67-3865628EBC60",
-                  "userId": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
-                  "date": "2022-11-16T14:37:03Z"
+                    "id": "D1C5CA29-AC1A-438A-A1CF-6256EC10F010",
+                    "content": "Lorem ipsum dolor sit amet",
+                    "postId": "91007F7C-DFC5-46EE-BA67-3865628EBC60",
+                    "userId": "73FDE1C3-089A-480E-A99A-1C67E030FC87",
+                    "date": "2022-11-16T14:37:03Z"
                 }
                 """###
             )
@@ -216,8 +216,8 @@ extension Endpoint {
                 body: [
                 ],
                 example: ###"""
-                  curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/comments/[id]/ \
-                      -H "Authorization: Bearer [TOKEN]"
+                curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/comments/[id]/ \
+                     -H "Authorization: Bearer [TOKEN]"
                 """###
             ),
             response: .init(

@@ -51,14 +51,14 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -X POST http://localhost:8080/api/v1/user/login/ \
-                    -H "Content-Type: application/json" \
-                    -H "Accept: application/json" \
-                    --data-raw '
-                    {
-                        "email": "root@localhost.com",
-                        "password": "ChangeMe1"
-                    }
-                    '
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "email": "root@localhost.com",
+                         "password": "ChangeMe1"
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -152,28 +152,28 @@ extension Endpoint {
                 ],
                 example: ###"""
                 {
-                  "items": [
-                    {
-                      "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
-                      "title": "Post #1",
-                      "imageUrl": "https://placekitten.com/640/360",
-                      "excerpt": "Excerpt #1",
-                      "date": "2022-10-31T11:25:30Z"
-                    },
-                    /* ... */
-                    {
-                      "id": "91007F7C-DFC5-46EE-BA67-3865628EBC60",
-                      "title": "Post #10",
-                      "imageUrl": "https://placekitten.com/640/360",
-                      "excerpt": "Excerpt #10",
-                      "date": "2022-10-22T11:25:30Z"
+                    "items": [
+                        {
+                            "id": "C76C17FB-FA6B-4586-8C76-C4B66F1EC1E0",
+                            "title": "Post #1",
+                            "imageUrl": "https://placekitten.com/640/360",
+                            "excerpt": "Excerpt #1",
+                            "date": "2022-10-31T11:25:30Z"
+                        },
+                        /* ... */
+                        {
+                            "id": "91007F7C-DFC5-46EE-BA67-3865628EBC60",
+                            "title": "Post #10",
+                            "imageUrl": "https://placekitten.com/640/360",
+                            "excerpt": "Excerpt #10",
+                            "date": "2022-10-22T11:25:30Z"
+                        }
+                    ],
+                    "metadata": {
+                        "per": 10,
+                        "total": 28,
+                        "page": 1
                     }
-                  ],
-                  "metadata": {
-                    "per": 10,
-                    "total": 28,
-                    "page": 1
-                  }
                 }
                 """###
             )
@@ -197,7 +197,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -X GET http://localhost:8080/api/v1/posts/[id]/ \
-                    -H "Accept: application/json"
+                     -H "Accept: application/json"
                 """###
             ),
             response: .init(
@@ -254,23 +254,23 @@ extension Endpoint {
                     .postInput(),
                 ],
                 example: ###"""
-                  curl -X POST http://localhost:8080/api/v1/posts/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                      {
-                          "imageUrl": "https://placekitten.com/640/360",
-                          "title": "Lorem ipsum",
-                          "excerpt": "Lorem ipsum",
-                          "date": "2022-10-27T20:05:51Z",
-                          "content": "Lorem ipsum dolor sit amet",
-                          "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
-                             "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46"
-                          ]
-                      }
-                      '
+                curl -X POST http://localhost:8080/api/v1/posts/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "imageUrl": "https://placekitten.com/640/360",
+                         "title": "Lorem ipsum",
+                         "excerpt": "Lorem ipsum",
+                         "date": "2022-10-27T20:05:51Z",
+                         "content": "Lorem ipsum dolor sit amet",
+                         "tagIds": [
+                            "1E3D953E-7FD8-43E4-B394-62854ED7FB7E",
+                            "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46"
+                         ]
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -327,22 +327,22 @@ extension Endpoint {
                     .postInput(),
                 ],
                 example: ###"""
-                  curl -X PUT http://localhost:8080/api/v1/posts/[id]/ \
-                      -H "Authorization: Bearer [TOKEN]" \
-                      -H "Content-Type: application/json" \
-                      -H "Accept: application/json" \
-                      --data-raw '
-                      {
-                          "imageUrl": "https://placekitten.com/640/360",
-                          "title": "Lorem ipsum",
-                          "excerpt": "Lorem ipsum",
-                          "date": "2022-10-27T20:05:51Z",
-                          "content": "Lorem ipsum dolor sit amet",
-                          "tagIds": [
-                             "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
-                          ]
-                      }
-                      '
+                curl -X PUT http://localhost:8080/api/v1/posts/[id]/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                         "imageUrl": "https://placekitten.com/640/360",
+                         "title": "Lorem ipsum",
+                         "excerpt": "Lorem ipsum",
+                         "date": "2022-10-27T20:05:51Z",
+                         "content": "Lorem ipsum dolor sit amet",
+                         "tagIds": [
+                            "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
+                         ]
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -395,22 +395,22 @@ extension Endpoint {
                     .postInput(isPatch: true),
                 ],
                 example: ###"""
-                   curl -X PATCH http://localhost:8080/api/v1/posts/[id]/ \
-                       -H "Authorization: Bearer [TOKEN]" \
-                       -H "Content-Type: application/json" \
-                       -H "Accept: application/json" \
-                       --data-raw '
-                       {
-                           "imageUrl": "https://placekitten.com/640/360",
-                           "title": "Lorem ipsum",
-                           "excerpt": "Lorem ipsum",
-                           "date": "2022-10-27T20:05:51Z",
-                           "content": "Lorem ipsum dolor sit amet",
-                           "tagIds": [
-                            "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46"
-                        ]
-                       }
-                       '
+                curl -X PATCH http://localhost:8080/api/v1/posts/[id]/ \
+                     -H "Authorization: Bearer [TOKEN]" \
+                     -H "Content-Type: application/json" \
+                     -H "Accept: application/json" \
+                     --data-raw '
+                     {
+                          "imageUrl": "https://placekitten.com/640/360",
+                          "title": "Lorem ipsum",
+                          "excerpt": "Lorem ipsum",
+                          "date": "2022-10-27T20:05:51Z",
+                          "content": "Lorem ipsum dolor sit amet",
+                          "tagIds": [
+                              "F34F7725-1DEF-4D58-AF96-DCA55ECAEE46"
+                          ]
+                     }
+                     '
                 """###
             ),
             response: .init(
@@ -461,7 +461,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                 curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/ \
-                    -H "Authorization: Bearer [TOKEN]"
+                     -H "Authorization: Bearer [TOKEN]"
                 """###
             ),
             response: .init(
