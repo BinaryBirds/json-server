@@ -39,9 +39,8 @@ struct TagController: RouteCollection {
     
     /**
      ```sh
-     curl -X GET http://localhost:8080/tags \
-         -H "Accept: application/json" \
-         |jq
+     curl -X GET http://localhost:8080/api/v1/tags/ \
+         -H "Accept: application/json"
      ```
      */
     func list(req: Request) async throws -> [Tag.List] {
@@ -52,9 +51,8 @@ struct TagController: RouteCollection {
     
     /**
      ```sh
-     curl -X GET http://localhost:8080/tags/[id]/ \
-         -H "Accept: application/json" \
-         |jq
+     curl -X GET http://localhost:8080/api/v1/tags/[id]/ \
+         -H "Accept: application/json"
      ```
      */
     func detail(req: Request) async throws -> Tag.Detail {
@@ -65,15 +63,15 @@ struct TagController: RouteCollection {
 
     /**
      ```sh
-     curl -X POST http://localhost:8080/tags \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X POST http://localhost:8080/api/v1/tags/ \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
          {
              "name": "Yellow"
          }
-         '|jq
+         '
      ```
      */
     func create(req: Request) async throws -> Tag.Detail {
@@ -85,15 +83,15 @@ struct TagController: RouteCollection {
 
     /**
      ```sh
-     curl -X PUT http://localhost:8080/tags/IDENTIFIER \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X PUT http://localhost:8080/api/v1/tags/[id]/ \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
          {
              "name": "Orange"
          }
-         '|jq
+         '
      ```
      */
     func update(req: Request) async throws -> Tag.Detail {
@@ -106,15 +104,15 @@ struct TagController: RouteCollection {
     
     /**
      ```sh
-     curl -X PATCH http://localhost:8080/tags/IDENTIFIER \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X PATCH http://localhost:8080/api/v1/tags/[id] \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
          {
              "name": "Orange"
          }
-         '|jq
+         '
      ```
      */
     func patch(req: Request) async throws -> Tag.Detail {
@@ -127,8 +125,8 @@ struct TagController: RouteCollection {
     
     /**
      ```sh
-     curl -i -X DELETE http://localhost:8080/tags/IDENTIFIER/ \
-         -H "Authorization: Bearer TOKEN"
+     curl -i -X DELETE http://localhost:8080/api/v1/tags/[id]/ \
+         -H "Authorization: Bearer [TOKEN]"
      ```
      */
     func delete(req: Request) async throws -> HTTPStatus {

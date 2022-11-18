@@ -57,9 +57,8 @@ struct PostController: RouteCollection {
 
     /**
      ```sh
-     curl -X GET http://localhost:8080/posts \
-         -H "Accept: application/json" \
-         |jq
+     curl -X GET http://localhost:8080/api/v1/posts/ \
+         -H "Accept: application/json"
      ```
      */
     func list(req: Request) async throws -> Page<Post.List> {
@@ -112,9 +111,8 @@ struct PostController: RouteCollection {
 
     /**
      ```sh
-     curl -X GET http://localhost:8080/posts/[id]/ \
-         -H "Accept: application/json" \
-         |jq
+     curl -X GET http://localhost:8080/api/v1/posts/[id]/ \
+         -H "Accept: application/json"
      ```
      */
     func detail(req: Request) async throws -> Post.Detail {
@@ -151,7 +149,7 @@ struct PostController: RouteCollection {
                 "1E3D953E-7FD8-43E4-B394-62854ED7FB7E"
              ]
          }
-         '|jq
+         '
      ```
      */
     func create(req: Request) async throws -> Post.Detail {
@@ -180,8 +178,8 @@ struct PostController: RouteCollection {
 
     /**
      ```sh
-     curl -X PUT http://localhost:8080/posts/IDENTIFIER/ \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X PUT http://localhost:8080/api/v1/posts/[id]/ \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
@@ -193,7 +191,7 @@ struct PostController: RouteCollection {
              "content": "Lorem ipsum dolor sit amet",
              "tagIds": []
          }
-         '|jq
+         '
      ```
      */
     func update(req: Request) async throws -> Post.Detail {
@@ -221,8 +219,8 @@ struct PostController: RouteCollection {
     
     /**
      ```sh
-     curl -X PATCH http://localhost:8080/posts/IDENTIFIER/ \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X PATCH http://localhost:8080/api/v1/posts/[id]/ \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
@@ -234,7 +232,7 @@ struct PostController: RouteCollection {
              "content": "Lorem ipsum dolor sit amet",
              "tagIds": []
          }
-         '|jq
+         '
      ```
      */
     func patch(req: Request) async throws -> Post.Detail {
@@ -263,7 +261,7 @@ struct PostController: RouteCollection {
     /**
      ```sh
      curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/ \
-         -H "Authorization: Bearer TOKEN"
+         -H "Authorization: Bearer [TOKEN]"
      ```
      */
     func delete(req: Request) async throws -> HTTPStatus {

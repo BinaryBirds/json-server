@@ -39,7 +39,7 @@ extension Endpoint.Header {
     static var authorization: Endpoint.Header {
         .init(
             key: "Authorization",
-            value: "Bearer [TOKEN]",
+            value: "Bearer token",
             info: "You have to provide a Bearer token using this header field to access this endpoint.",
             isMandatory: true
         )

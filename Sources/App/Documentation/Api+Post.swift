@@ -395,7 +395,7 @@ extension Endpoint {
                     .postInput(isPatch: true),
                 ],
                 example: ###"""
-                   curl -X PATCH http://localhost:8080/posts/[id]/ \
+                   curl -X PATCH http://localhost:8080/api/v1/posts/[id]/ \
                        -H "Authorization: Bearer [TOKEN]" \
                        -H "Content-Type: application/json" \
                        -H "Accept: application/json" \

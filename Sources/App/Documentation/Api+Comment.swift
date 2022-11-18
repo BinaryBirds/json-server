@@ -217,7 +217,7 @@ extension Endpoint {
                 ],
                 example: ###"""
                   curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/comments/[id]/ \
-                      -H "Authorization: Bearer TOKEN"
+                      -H "Authorization: Bearer [TOKEN]"
                 """###
             ),
             response: .init(

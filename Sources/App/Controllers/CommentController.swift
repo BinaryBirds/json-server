@@ -35,9 +35,8 @@ struct CommentController: RouteCollection {
 
     /**
      ```sh
-     curl -X GET http://localhost:8080/posts/IDENTIFIER/comments/ \
-         -H "Accept: application/json" \
-         |jq
+     curl -X GET http://localhost:8080/api/v1/posts/[id]/comments/ \
+         -H "Accept: application/json"
      ```
      */
     func list(req: Request) async throws -> [Comment.List] {
@@ -79,15 +78,15 @@ struct CommentController: RouteCollection {
 
     /**
      ```sh
-     curl -X POST http://localhost:8080/posts/IDENTIFIER/comments/ \
-         -H "Authorization: Bearer TOKEN" \
+     curl -X POST http://localhost:8080/api/v1/posts/[id]/comments/ \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
          {
              "content": "Lorem ipsum dolor sit amet"
          }
-         '|jq
+         '
      ```
      */
     func create(req: Request) async throws -> Comment.Detail {
@@ -124,8 +123,8 @@ struct CommentController: RouteCollection {
 
     /**
      ```sh
-     curl -i -X DELETE http://localhost:8080/posts/IDENTIFIER/comments/IDENTIFIER/ \
-         -H "Authorization: Bearer TOKEN" \
+     curl -i -X DELETE http://localhost:8080/api/v1/posts/[id]/comments/[id]/ \
+         -H "Authorization: Bearer [TOKEN]" \
      ```
      */
     func delete(req: Request) async throws -> Comment.Detail {

@@ -33,7 +33,7 @@ struct UserController: RouteCollection {
              "email": "root@localhost.com",
              "password": "ChangeMe1"
          }
-         '|jq
+         '
      ```
      */
     func login(req: Request) async throws -> UserToken.Detail {
@@ -61,9 +61,8 @@ struct UserController: RouteCollection {
     /**
      ```sh
      curl -X GET http://localhost:8080/api/v1/user/me/ \
-         -H "Authorization: Bearer TOKEN" \
-         -H "Accept: application/json" \
-         |jq
+         -H "Authorization: Bearer [TOKEN]" \
+         -H "Accept: application/json"
      ```
      */
     func me(req: Request) async throws -> User.Detail {
@@ -84,7 +83,7 @@ struct UserController: RouteCollection {
     /**
      ```sh
      curl -X PUT http://localhost:8080/api/v1/user/me/ \
-         -H "Authorization: Bearer TOKEN" \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
@@ -94,7 +93,7 @@ struct UserController: RouteCollection {
              "email": "root@localhost.com",
              "password": "ChangeMe1"
          }
-         '|jq
+         '
      ```
      */
     func update(req: Request) async throws -> User.Detail {
@@ -124,7 +123,7 @@ struct UserController: RouteCollection {
     /**
      ```sh
      curl -X PATCH http://localhost:8080/api/v1/user/me/ \
-         -H "Authorization: Bearer TOKEN" \
+         -H "Authorization: Bearer [TOKEN]" \
          -H "Content-Type: application/json" \
          -H "Accept: application/json" \
          --data-raw '
@@ -134,7 +133,7 @@ struct UserController: RouteCollection {
              "email": "root@localhost.com",
              "password": "ChangeMe1"
          }
-         '|jq
+         '
      ```
      */
     func patch(req: Request) async throws -> User.Detail {
