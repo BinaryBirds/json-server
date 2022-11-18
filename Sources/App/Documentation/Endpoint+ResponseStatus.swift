@@ -22,7 +22,7 @@ extension Endpoint.Response.Status {
     }
     
     static var notFound: Endpoint.Response.Status {
-        .init(value: .notFound, info: "Object not found.")
+        .init(value: .notFound, info: "Object not found for the provided identifier.")
     }
     
     static var deleted: Endpoint.Response.Status {

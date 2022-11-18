@@ -50,15 +50,8 @@ extension Endpoint {
                 body: [
                 ],
                 example: ###"""
-                curl -X POST http://localhost:8080/api/v1/user/login/ \
-                     -H "Content-Type: application/json" \
-                     -H "Accept: application/json" \
-                     --data-raw '
-                     {
-                         "email": "root@localhost.com",
-                         "password": "ChangeMe1"
-                     }
-                     '
+                curl -X GET http://localhost:8080/api/v1/posts/ \
+                     -H "Accept: application/json"
                 """###
             ),
             response: .init(

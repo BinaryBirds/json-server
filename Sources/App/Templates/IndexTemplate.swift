@@ -36,11 +36,45 @@ struct IndexTemplate {
                 }
                 
                 Div {
+                    
                     Div {
-                        H2("Base URL")
-                        P("http://localhost:8080/api/v1/")
-                        Br()
-                        Br()
+                        Div {
+                            H2("Base URL")
+//                            P("http://localhost:8080/api/v1/")
+                            P("https://json-server.binarybirds.com/api/v1/")
+                        }
+                        .class("global-info")
+
+                        Div {
+                            H3("Global query parameters")
+                            
+                            Ul {
+                                Li {
+                                    Span(" - ")
+                                        .style("color: #999 !important;")
+                                    Span("sleep")
+                                        .class("name")
+                                    Span(": " + "Int")
+                                        .class("type")
+                                    Span("Emulate slow response times by providing a sleep value in seconds. (e.g. ?sleep=3)")
+                                        .class("description")
+                                }
+                                
+                                Li {
+                                    Span(" - ")
+                                        .style("color: #999 !important;")
+                                    Span("chaos")
+                                        .class("name")
+                                    Span(": " + "String")
+                                        .class("type")
+                                    Span("The server might returns with a random response if this parameter is present. (e.g. ?chaos=true)")
+                                        .class("description")
+                                }
+                            }
+                            .class("parameters", "content-block")
+                            
+                        }
+                        .class("global-info")
 
                         for (groupIndex, group) in groups.enumerated() {
                             Header {

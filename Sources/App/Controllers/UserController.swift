@@ -107,8 +107,8 @@ struct UserController: RouteCollection {
         
         model.imageUrl = input.imageUrl
         model.name = input.name
-        model.email = input.email
-        model.password = try Bcrypt.hash(input.password)
+//        model.email = input.email
+//        model.password = try Bcrypt.hash(input.password)
 
         try await model.update(on: req.db)
         
@@ -147,10 +147,10 @@ struct UserController: RouteCollection {
         
         model.imageUrl = input.imageUrl ?? model.imageUrl
         model.name = input.name ?? model.name
-        model.email = input.email ?? model.email
-        if let password = input.password {
-            model.password = try Bcrypt.hash(password)
-        }
+//        model.email = input.email ?? model.email
+//        if let password = input.password {
+//            model.password = try Bcrypt.hash(password)
+//        }
 
         try await model.update(on: req.db)
         

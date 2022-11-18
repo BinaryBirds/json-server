@@ -256,3 +256,6 @@ span.type.object { color: var(--black-color); }
 .details-wrapper {
     display: none;
 }
+.global-info {
+    margin-top: 32px;
+}

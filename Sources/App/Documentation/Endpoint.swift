@@ -172,8 +172,7 @@ extension Endpoint {
         let headers: [Header]
         let body: [Object]
         let example: String
-        
-        
+                
         /*
         pre code .keyword { color: #9B2393; }
         pre code .type { color: #3900A0; }
@@ -188,6 +187,7 @@ extension Endpoint {
             
         /// @NOTE: total hack, need a better tokenizer... :)
         var curl: String {
+            
             var curl = example
                 .replacingOccurrences(of: "curl", with: "<span class=\"call\">curl</span>")
                 .replacingOccurrences(of: "-X POST", with: "-X <span class=\"keyword\">POST</span>")
@@ -203,6 +203,7 @@ extension Endpoint {
                 .replacingOccurrences(of: "\\", with: "<span class=\"keyword\">\\</span>")
                 .replacingOccurrences(of: " \"", with: " <span class=\"string\">\"")
                 .replacingOccurrences(of: "\" ", with: "\"</span> ")
+                .replacingOccurrences(of: "http://localhost:8080/", with: "https://json-server.binarybirds.com/")
             
             if curl.hasSuffix("'") {
                 curl += "</span>"
