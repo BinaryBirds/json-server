@@ -172,39 +172,70 @@ extension Endpoint {
         let headers: [Header]
         let body: [Object]
         let example: String
-                
-        /*
-        pre code .keyword { color: #9B2393; }
-        pre code .type { color: #3900A0; }
-        pre code .call { color: #326D74; }
-        pre code .property { color: #6C36A9; }
-        pre code .number { color: #1C00CF; }
-        pre code .string { color: #C41A16; }
-        pre code .comment { color: #5D6C79; }
-        pre code .dotAccess { color: #0F68A0; }
-        pre code .preprocessing { color: #643820;
-         */
-            
+        
+        var curlExample: String {
+            example.replacingOccurrences(
+                of: "http://localhost:8080/",
+                with: "https://jsonserver.binarybirds.com/"
+            )
+        }
+
         /// @NOTE: total hack, need a better tokenizer... :)
         var curl: String {
-            
-            var curl = example
-                .replacingOccurrences(of: "curl", with: "<span class=\"call\">curl</span>")
-                .replacingOccurrences(of: "-X POST", with: "-X <span class=\"keyword\">POST</span>")
-                .replacingOccurrences(of: "-X GET", with: "-X <span class=\"keyword\">GET</span>")
-                .replacingOccurrences(of: "-X PUT", with: "-X <span class=\"keyword\">PUT</span>")
-                .replacingOccurrences(of: "-X PATCH", with: "-X <span class=\"keyword\">PATCH</span>")
-                .replacingOccurrences(of: "-X DELETE", with: "-X <span class=\"keyword\">DELETE</span>")
-                .replacingOccurrences(of: "-X", with: "<span class=\"property\">-X</span>")
-                .replacingOccurrences(of: "-i", with: "<span class=\"property\">-i</span>")
-                .replacingOccurrences(of: "-H", with: "<span class=\"property\">-H</span>")
-                .replacingOccurrences(of: "--data-raw '", with: "<span class=\"property\">--data-raw</span> <span class=\"string\">'")
-//                .replacingOccurrences(of: "'", with: "'</span>")
-                .replacingOccurrences(of: "\\", with: "<span class=\"keyword\">\\</span>")
-                .replacingOccurrences(of: " \"", with: " <span class=\"string\">\"")
-                .replacingOccurrences(of: "\" ", with: "\"</span> ")
-                .replacingOccurrences(of: "http://localhost:8080/", with: "https://jsonserver.binarybirds.com/")
-            
+            var curl = curlExample
+                .replacingOccurrences(
+                    of: "curl",
+                    with: "<span class=\"call\">curl</span>"
+                )
+                .replacingOccurrences(
+                    of: "-X POST",
+                    with: "-X <span class=\"keyword\">POST</span>"
+                )
+                .replacingOccurrences(
+                    of: "-X GET",
+                    with: "-X <span class=\"keyword\">GET</span>"
+                )
+                .replacingOccurrences(
+                    of: "-X PUT",
+                    with: "-X <span class=\"keyword\">PUT</span>"
+                )
+                .replacingOccurrences(
+                    of: "-X PATCH",
+                    with: "-X <span class=\"keyword\">PATCH</span>"
+                )
+                .replacingOccurrences(
+                    of: "-X DELETE",
+                    with: "-X <span class=\"keyword\">DELETE</span>"
+                )
+                .replacingOccurrences(
+                    of: "-X",
+                    with: "<span class=\"property\">-X</span>"
+                )
+                .replacingOccurrences(
+                    of: "-i",
+                    with: "<span class=\"property\">-i</span>"
+                )
+                .replacingOccurrences(
+                    of: "-H",
+                    with: "<span class=\"property\">-H</span>"
+                )
+                .replacingOccurrences(
+                    of: "--data-raw '",
+                    with: "<span class=\"property\">--data-raw</span> <span class=\"string\">'"
+                )
+                .replacingOccurrences(
+                    of: "\\",
+                    with: "<span class=\"keyword\">\\</span>"
+                )
+                .replacingOccurrences(
+                    of: " \"",
+                    with: " <span class=\"string\">\""
+                )
+                .replacingOccurrences(
+                    of: "\" ",
+                    with: "\"</span> "
+                )
+
             if curl.hasSuffix("'") {
                 curl += "</span>"
             }
