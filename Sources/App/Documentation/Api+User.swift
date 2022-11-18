@@ -145,6 +145,7 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
                 ],
                 headers: [
@@ -199,6 +200,7 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
                 ],
                 headers: [

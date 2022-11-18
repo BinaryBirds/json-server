@@ -40,6 +40,7 @@ extension Endpoint {
                 statusCodes: [
                     .ok,
                     .unauthorized,
+                    .badRequest,
                 ],
                 headers: [
                     

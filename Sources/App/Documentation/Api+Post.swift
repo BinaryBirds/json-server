@@ -204,6 +204,7 @@ extension Endpoint {
                 statusCodes: [
                     .ok,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -276,7 +277,9 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -348,7 +351,9 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -416,7 +421,9 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -466,8 +473,9 @@ extension Endpoint {
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .noContent, info: "Object succesfully deleted."),
+                    .deleted,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     

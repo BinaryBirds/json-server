@@ -96,6 +96,7 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -145,6 +146,7 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
                 ],
                 headers: [
@@ -195,7 +197,9 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -231,7 +235,7 @@ extension Endpoint {
                     .tagInput(isPatch: true),
                 ],
                 example: ###"""
-                curl -X PATCH http://localhost:8080/api/v1/tags/ \
+                curl -X PATCH http://localhost:8080/api/v1/tags/[id]/ \
                      -H "Authorization: Bearer [TOKEN]" \
                      -H "Content-Type: application/json" \
                      -H "Accept: application/json" \
@@ -245,7 +249,9 @@ extension Endpoint {
             response: .init(
                 statusCodes: [
                     .ok,
+                    .badRequest,
                     .unauthorized,
+                    .notFound,
                 ],
                 headers: [
                     .contentTypeResponse,
@@ -284,8 +290,9 @@ extension Endpoint {
             ),
             response: .init(
                 statusCodes: [
-                    .init(value: .noContent, info: "Object succesfully deleted."),
+                    .deleted,
                     .unauthorized,
+                    .notFound
                 ],
                 headers: [
                     
