@@ -247,7 +247,7 @@ private extension IndexTemplate {
     @TagBuilder
     static func exampleBlock(_ endpoint: Endpoint, endpointId: String) -> SwiftHtml.Tag {
         Div {
-            Textarea(endpoint.request.example)
+            Textarea(endpoint.request.curlExample)
                 .id("example-code-\(endpointId)")
                 .class("original-code")
             
