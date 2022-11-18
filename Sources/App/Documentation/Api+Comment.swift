@@ -14,7 +14,7 @@ extension Endpoint {
         Endpoint(
             name: "List comments",
             method: .get,
-            path: "/api/v1/posts/[id]/comments/",
+            path: "/posts/[id]/comments/",
             info: "List all the comments for a given post.",
             request: .init(
                 queryParams: [
@@ -106,7 +106,7 @@ extension Endpoint {
         Endpoint(
             name: "Create comment",
             method: .post,
-            path: "/api/v1/posts/[id]/comments/",
+            path: "/posts/[id]/comments/",
             info: "Create a new comment under an existing post.",
             request: .init(
                 queryParams: [
@@ -207,7 +207,7 @@ extension Endpoint {
         Endpoint(
             name: "Delete comment",
             method: .delete,
-            path: "/api/v1/posts/[id]/comments/[id]/",
+            path: "/posts/[id]/comments/[id]/",
             info: "Removes a given comment from an existing post item.",
             request: .init(
                 queryParams: [

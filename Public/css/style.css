@@ -57,11 +57,10 @@ footer {
     border-radius: 4px;
     margin-bottom: 12px;
 }
-
 .endpoint > header {
     position: relative;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 14px;
     padding: 8px;
 }
 .endpoint > header:hover {
@@ -87,18 +86,10 @@ footer {
 .endpoint .details header {
     margin-bottom: 16px;
 }
-
-
-
-
-
-
 textarea.original-code {
     visibility: hidden;
     display: none;
 }
-
-
 .content-block {
     margin-top: 16px;
     margin-bottom: 32px;
@@ -138,11 +129,6 @@ pre code .highlight {
 pre code .highlight.shifted {
     margin-left: 0;
 }
-
-
-
-
-
 .method {
     text-transform: uppercase;
     background: black;
@@ -150,7 +136,7 @@ pre code .highlight.shifted {
     padding: 4px 8px;
     border-radius: 4px;
     margin-right: 4px;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 24px;
 }
 .method.get {
@@ -189,13 +175,10 @@ pre code .highlight.shifted {
     margin-top: 8px;
     margin-left: 10px;
     color: var(--secondary-text-color);
-/*    font-size: 14px;*/
 }
 .parameters .required {
     font-weight: bold;
 }
-
-
 span.type.uuid { color: var(--green-color); }
 span.type.string { color: var(--orange-color); }
 span.type.bool { color: var(--purple-color); }
@@ -203,19 +186,17 @@ span.type.int { color: var(--blue-color); }
 span.type.double { color: var(--blue-color); }
 span.type.array { color: var(--black-color); }
 span.type.object { color: var(--black-color); }
-
-
 .tab button {
-    font-size: 16px;
+    font-size: 14px;
     display: inline-block;
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 8px 16px;
-    transition: 0.3s;
-    margin-right: 8px;
+    padding: 8px 12px;
+    margin-right: 2px;
     background-color: var(--secondary-background-color);
     color: #999;
+    transition: 0.3s;
 }
 .tab button:hover {
     background-color: var(--primary-background-color);
@@ -234,7 +215,6 @@ span.type.object { color: var(--black-color); }
 .tabcontent.first {
     display: block;
 }
-
 .copy-button {
     position: absolute;
     top: 60px;
@@ -244,18 +224,29 @@ span.type.object { color: var(--black-color); }
     background: var(--primary-background-color);
     color: var(--primary-text-color);
     font-weight: bold;
-/*    border-radius: 4px;*/
     width: 80px;
     text-transform: uppercase;
 }
 .copy-button:hover {
     cursor: pointer;
 }
-
-
 .details-wrapper {
     display: none;
 }
 .global-info {
     margin-top: 32px;
+}
+
+@media screen and (min-width: 480px) {
+    .tab button {
+        padding: 8px 16px;
+        font-size: 16px;
+        margin-right: 4px;
+    }
+    .endpoint > header {
+        font-size: 20px;
+    }
+    .endpoint .method {
+        font-size: 16px;
+    }
 }
