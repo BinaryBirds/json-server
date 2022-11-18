@@ -1,4 +1,4 @@
-release:
+release: 
 	swift build -c release
 
 update:
@@ -10,10 +10,8 @@ clean:
 test:
 	swift test --parallel
 
-deploy:
-	systemctl stop jsonserver
-	release
-	cp .build/release/Run /var/www/jsonserver.binarybirds.com/
-	systemctl start jsonserver
-
-
+deploy: release
+	sudo systemctl stop jsonserver
+	sudo cp .build/release/Run /var/www/jsonserver.binarybirds.com/
+	sudo systemctl start jsonserver
+	sudo systemctl status jsonserver
