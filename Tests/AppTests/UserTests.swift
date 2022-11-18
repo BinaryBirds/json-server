@@ -89,7 +89,7 @@ final class UserTests: AppTestCase {
             .expect(User.Detail.self) { user in
                 XCTAssertEqual(user.imageUrl, nil)
                 XCTAssertEqual(user.name, nil)
-                XCTAssertEqual(user.email, "updated@localhost.com")
+                XCTAssertEqual(user.email, "root@localhost.com")
             }
             .test()
     }
