@@ -9,9 +9,9 @@ import Foundation
 import Vapor
 
 struct Endpoint {
-
+    
     let name: String
-
+    
     let method: Method
     let path: String
     let info: String
@@ -36,7 +36,7 @@ extension Endpoint {
     
     enum DataType: RawRepresentable {
         typealias RawValue = String
-
+        
         case uuid
         case bool
         case int
@@ -46,7 +46,7 @@ extension Endpoint {
         case object(String)
         
         // MARK: - raw representable
-
+        
         var rawValue: String {
             switch self {
             case .uuid:
@@ -90,7 +90,7 @@ extension Endpoint {
             }
             return nil
         }
-
+        
         // MARK: -
         
         var rawName: String {
@@ -123,7 +123,7 @@ extension Endpoint {
                 return rawName
             }
         }
-
+        
         var htmlValue: String {
             "<span class=\"type \(rawType)\">\(name)</span>"
         }
@@ -149,7 +149,7 @@ extension Endpoint {
 }
 
 extension Endpoint {
-
+    
     struct Object {
         let name: String
         let info: String
@@ -179,7 +179,7 @@ extension Endpoint {
                 with: "https://jsonserver.binarybirds.com/"
             )
         }
-
+        
         /// @NOTE: total hack, need a better tokenizer... :)
         var curl: String {
             var curl = curlExample
@@ -235,7 +235,7 @@ extension Endpoint {
                     of: "\" ",
                     with: "\"</span> "
                 )
-
+            
             if curl.hasSuffix("'") {
                 curl += "</span>"
             }
@@ -246,24 +246,40 @@ extension Endpoint {
 
 
 extension Endpoint {
-
+    
     struct Response {
         
         struct Status {
             let value: HTTPResponseStatus
             let info: String
         }
-
+        
         let statusCodes: [Status]
         let headers: [Header]
         let body: [Object]
         let example: String
+        
+        var highlightedExample: String {
+            let strings = #""[^"]*""#
+            //            let strings = #""[^"]*"[,\s]"#
+            //            let numbers = #"[+-]?(\d+([.]\d*)?([eE][+-]?\d+)?|[.]\d+([eE][+-]?\d+)?)"#
+            let keywords =  #"(true|false|null)"#
+            //            String(old.dropLast())
+            
+            return example
+                .replacingMatches(pattern: strings) { old in
+                    #"<span class="string">"# + old + #"</span>"#
+                }
+                .replacingMatches(pattern: keywords) { old in
+                    #"<span class="keyword">"# + old + #"</span>"#
+                }
+        }
     }
 }
 
 @resultBuilder
 enum EndpointBuilder {
-
+    
     static func buildBlock(_ components: Endpoint...) -> [Endpoint] {
         components
     }
@@ -272,6 +288,6 @@ enum EndpointBuilder {
 struct Group {
     let name: String
     let info: String
-
+    
     let endpoints: [Endpoint]
 }

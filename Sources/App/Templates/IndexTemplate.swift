@@ -21,9 +21,9 @@ struct IndexTemplate {
                 Link(rel: .stylesheet).href("./css/style.css")
                 Link(rel: .stylesheet).href("./css/code.css")
                 
-//                Link(rel: .icon).href("./img/\(key).ico")
-//                Link(rel: .shortcutIcon).href("./img/\(key)/favicon.ico")
-//                Link(rel: .appleTouchIcon).href("./img/\(key)/apple-touch-icon.png")
+                //                Link(rel: .icon).href("./img/\(key).ico")
+                //                Link(rel: .shortcutIcon).href("./img/\(key)/favicon.ico")
+                //                Link(rel: .appleTouchIcon).href("./img/\(key)/apple-touch-icon.png")
                 
             }
             Body {
@@ -40,11 +40,11 @@ struct IndexTemplate {
                     Div {
                         Div {
                             H2("Base URL")
-//                            P("http://localhost:8080/api/v1/")
+                            //                            P("http://localhost:8080/api/v1/")
                             P("https://jsonserver.binarybirds.com/api/v1/")
                         }
                         .class("global-info")
-
+                        
                         Div {
                             H3("Global query parameters")
                             
@@ -75,7 +75,7 @@ struct IndexTemplate {
                             
                         }
                         .class("global-info")
-
+                        
                         for (groupIndex, group) in groups.enumerated() {
                             Header {
                                 H2(group.name)
@@ -231,7 +231,7 @@ private extension IndexTemplate {
                             Span(param.type.htmlValue)
                                 .class("type")
                                 .class(add: "required", param.isMandatory)
-
+                            
                             Span(param.info)
                                 .class("description")
                         }
@@ -269,7 +269,7 @@ private extension IndexTemplate {
         
         H4("Sample response")
         Pre {
-            Code(endpoint.response.example)
+            Code(endpoint.response.highlightedExample)
         }
         .class("content-block")
     }
@@ -310,7 +310,7 @@ private extension IndexTemplate {
             H4("Headers")
             render(headers: endpoint.request.headers)
         }
-
+        
         if !endpoint.request.body.isEmpty {
             H4("Body")
             render(objects: endpoint.request.body)
